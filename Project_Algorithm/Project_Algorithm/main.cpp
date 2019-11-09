@@ -8,6 +8,7 @@
 
 #include "Fasta_To_Bits.hpp"
 #include "Score.hpp"
+#include "Bits_To_Text.hpp"
 
 
 int main(int argc, const char * argv[]) {
@@ -19,7 +20,9 @@ int main(int argc, const char * argv[]) {
     */
     
     //ifstream input(argv[1]);
+    string bits;
     ifstream input("/Users/langletmaxime/Desktop/P4/C++/swipe/P00533.fasta");
-    Fasta_To_Bits(input);
+    bits = Fasta_To_Bits(input);
+    cout << Bits_To_Text(bits) << endl;
     return 0;
 }

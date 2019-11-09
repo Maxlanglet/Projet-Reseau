@@ -18,12 +18,12 @@ string string_To_Bits(string text){
         textBinaire += bitset<8>(lettre).to_string();
         i++;
     }
-    cout << textBinaire << endl;
+    //cout << textBinaire << endl;
     return textBinaire;
 }
 
 
-void Fasta_To_Bits(ifstream &input){  //Il faudra changer le void en string apres pour comparaison
+string Fasta_To_Bits(ifstream &input){  //Il faudra changer le void en string apres pour comparaison
     /*
     Style de format FASTA :
      >Rosetta_Example_1
@@ -40,9 +40,8 @@ void Fasta_To_Bits(ifstream &input){  //Il faudra changer le void en string apre
      
      Source : http://rosettacode.org/wiki/FASTA_format
     */
-    
+    string ligne, nom, contenu;
     if(input){
-        string ligne, nom, contenu;
         while(getline(input, ligne)){
             if(ligne.empty() || ligne[0]=='>'){
                 if(!nom.empty()){
@@ -66,10 +65,14 @@ void Fasta_To_Bits(ifstream &input){  //Il faudra changer le void en string apre
         }
         if(!nom.empty()){
             cout << nom << ":" << contenu << endl;
-            cout << nom << ":" << string_To_Bits(contenu) << endl;
+            //cout << nom << ":" << string_To_Bits(contenu) << endl;
+            return string_To_Bits(contenu);
         }
     }
     else{
+        string pasouvert("Pas ouvert");
         cout << "Erreur dans l'ouverture du fichier"<<endl;
+        return pasouvert;
     }
+    return string_To_Bits(contenu);
 }

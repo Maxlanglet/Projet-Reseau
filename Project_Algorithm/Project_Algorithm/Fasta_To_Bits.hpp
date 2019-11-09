@@ -13,10 +13,11 @@
 #include <fstream>
 #include <bitset>
 #include <string>
+#include <sstream>
 
 using namespace std;
 
 string string_To_Bits(string text);
-void Fasta_To_Bits(ifstream &input);
+string Fasta_To_Bits(ifstream &input);
 
 #endif /* Fasta_To_Bits_hpp */

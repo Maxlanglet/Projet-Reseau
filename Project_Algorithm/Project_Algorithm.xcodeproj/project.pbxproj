@@ -10,6 +10,7 @@
 		A43DBEF6236C465000CA7B8F /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A43DBEF5236C465000CA7B8F /* main.cpp */; };
 		A4BFAA1F2375D2BB00F0905D /* Fasta_To_Bits.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4BFAA1D2375D2BB00F0905D /* Fasta_To_Bits.cpp */; };
 		A4BFAA232375DEB000F0905D /* Score.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4BFAA212375DEB000F0905D /* Score.cpp */; };
+		A4BFAA262376FC9E00F0905D /* Bits_To_Text.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4BFAA242376FC9E00F0905D /* Bits_To_Text.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -31,6 +32,8 @@
 		A4BFAA1E2375D2BB00F0905D /* Fasta_To_Bits.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Fasta_To_Bits.hpp; sourceTree = "<group>"; };
 		A4BFAA212375DEB000F0905D /* Score.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Score.cpp; sourceTree = "<group>"; };
 		A4BFAA222375DEB000F0905D /* Score.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Score.hpp; sourceTree = "<group>"; };
+		A4BFAA242376FC9E00F0905D /* Bits_To_Text.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Bits_To_Text.cpp; sourceTree = "<group>"; };
+		A4BFAA252376FC9E00F0905D /* Bits_To_Text.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Bits_To_Text.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +69,8 @@
 				A43DBEF5236C465000CA7B8F /* main.cpp */,
 				A4BFAA212375DEB000F0905D /* Score.cpp */,
 				A4BFAA222375DEB000F0905D /* Score.hpp */,
+				A4BFAA242376FC9E00F0905D /* Bits_To_Text.cpp */,
+				A4BFAA252376FC9E00F0905D /* Bits_To_Text.hpp */,
 				A4BFAA1D2375D2BB00F0905D /* Fasta_To_Bits.cpp */,
 				A4BFAA1E2375D2BB00F0905D /* Fasta_To_Bits.hpp */,
 			);
@@ -130,6 +135,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A4BFAA232375DEB000F0905D /* Score.cpp in Sources */,
+				A4BFAA262376FC9E00F0905D /* Bits_To_Text.cpp in Sources */,
 				A4BFAA1F2375D2BB00F0905D /* Fasta_To_Bits.cpp in Sources */,
 				A43DBEF6236C465000CA7B8F /* main.cpp in Sources */,
 			);
