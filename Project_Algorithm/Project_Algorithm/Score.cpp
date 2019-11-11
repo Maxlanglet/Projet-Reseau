@@ -10,12 +10,38 @@
 
 int comparaison_De_Sequence(ifstream &file, string sequence){
     if(file){
-        char lettre1 = '0', lettre2 = '0';
-        int i = 0;
-        string bits;
-        while(lettre2 != '\0'){
-            lettre1 = sequence[i];
-            lettre2 = file[i];
+        char lettre2;
+        int i = 0, k=0, l=0;
+        string bits, test1, test2;
+        do{
+            file.get(lettre2);
+            bits.push_back(lettre2);
+        }while(!file.eof());
+        /*
+        for(i = 0; i<sequence.size();i++){
+            cout << bits[i] << endl;
+            cout << lettre2 << endl;
+        }
+         */
+        while(i<bits.size()-sequence.size()){
+            for(int j =k; j<sequence.size()+k;j++){
+                test1.push_back(bits[j]);
+            }
+            for(int j=0;j<sequence.size();j++){
+                if(test1[j]!=sequence[j]){
+                    test1 = "";
+                    l=0;
+                    break;
+                }
+                else{
+                    l++;
+                    if(l==sequence.size()){
+                        cout << "Comparaison trouvée" << endl;
+                        break;
+                    }
+                }
+            }
+            i++;
         }
     }
     else{

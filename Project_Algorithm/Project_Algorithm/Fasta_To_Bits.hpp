@@ -14,6 +14,7 @@
 #include <bitset>
 #include <string>
 #include <sstream>
+#include <cstdio>
 
 using namespace std;
 

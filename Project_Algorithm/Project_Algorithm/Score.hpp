@@ -12,6 +12,6 @@
 #include "Fasta_To_Bits.hpp"
 
 int score(string sequence);
-int comparaison_De_Sequence(ifstream file, string sequence);
+int comparaison_De_Sequence(ifstream &file, string sequence);
 
 #endif /* Score_hpp */
