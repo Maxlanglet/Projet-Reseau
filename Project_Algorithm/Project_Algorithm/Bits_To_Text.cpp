@@ -12,10 +12,12 @@
 string Bits_To_Text(string bits){
     string text("");
     stringstream sstream(bits);
+    char valeur;
     while(sstream.good()){
         bitset<8> bit;
         sstream >> bit;
-        text += char(bit.to_ulong());
+        valeur = char(bit.to_ulong());
+        text += score_Inverse(valeur);
     }
     //cout << bits << endl;
     return text;

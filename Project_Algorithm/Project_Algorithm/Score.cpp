@@ -52,92 +52,186 @@ int comparaison_De_Sequence(ifstream &file, string sequence){
 }
 //Pas sur de si c'est juste ca mais bon au cas ou
 
-int score(string sequence){//lire séquence et assigner score pour chaque lettre donc faire binaire en lettre
-    int i=0, score = 0;
+string Score(string sequence){//lire séquence et assigner score pour chaque lettre donc faire binaire en lettre
+    int i=0;
     char lettre = '\0';
+    string score;
     for(i=0;i<sequence.size();i++){
         lettre = sequence[i];
+        if(lettre == '-'){
+            score += bitset<8>(0).to_string();
+        }
         if(lettre == 'A'){
-            score += 1;
+            score += bitset<8>(1).to_string();
         }
         if(lettre == 'B'){
-            score += 2;
+            score += bitset<8>(2).to_string();
         }
         if(lettre == 'C'){
-            score += 3;
+            score += bitset<8>(3).to_string();
         }
         if(lettre == 'D'){
-            score += 4;
+            score += bitset<8>(4).to_string();
         }
         if(lettre == 'E'){
-            score += 5;
+            score += bitset<8>(5).to_string();
         }
         if(lettre == 'F'){
-            score += 6;
+            score += bitset<8>(6).to_string();
         }
         if(lettre == 'G'){
-            score += 7;
+            score += bitset<8>(7).to_string();
         }
         if(lettre == 'H'){
-            score += 8;
+            score += bitset<8>(8).to_string();
         }
         if(lettre == 'I'){
-            score += 9;
+            score += bitset<8>(9).to_string();
         }
         if(lettre == 'J'){
-            score += 27;
+            score += bitset<8>(27).to_string();
         }
         if(lettre == 'K'){
-            score += 10;
+            score += bitset<8>(10).to_string();
         }
         if(lettre == 'L'){
-            score += 11;
+            score += bitset<8>(11).to_string();
         }
         if(lettre == 'M'){
-            score += 12;
+            score += bitset<8>(12).to_string();
         }
         if(lettre == 'N'){
-            score += 13;
+            score += bitset<8>(13).to_string();
         }
         if(lettre == 'O'){
-            score += 26;
+            score += bitset<8>(26).to_string();
         }
         if(lettre == 'P'){
-            score += 14;
+            score += bitset<8>(14).to_string();
         }
         if(lettre == 'Q'){
-            score += 15;
+            score += bitset<8>(15).to_string();
         }
         if(lettre == 'R'){
-            score += 16;
+            score += bitset<8>(16).to_string();
         }
         if(lettre == 'S'){
-            score += 17;
+            score += bitset<8>(17).to_string();
         }
         if(lettre == 'T'){
-            score += 18;
+            score += bitset<8>(18).to_string();
         }
         if(lettre == 'U'){
-            score += 24;
+            score += bitset<8>(24).to_string();
         }
         if(lettre == 'V'){
-            score += 19;
+            score += bitset<8>(19).to_string();
         }
         if(lettre == 'W'){
-            score += 20;
+            score += bitset<8>(20).to_string();
         }
         if(lettre == 'X'){
-            score += 21;
+            score += bitset<8>(21).to_string();
         }
         if(lettre == 'Y'){
-            score += 22;
+            score += bitset<8>(22).to_string();
         }
         if(lettre == 'Z'){
-            score += 23;
+            score += bitset<8>(23).to_string();
         }
         if(lettre == '*'){
-            score += 25;
+            score += bitset<8>(25).to_string();
         }
     }
     return score;
+}
+
+
+char score_Inverse(int valeur){
+    char lettre = '\0';
+    if(valeur == 0){
+        lettre = '-';
+    }
+    if(valeur == 1){
+        lettre = 'A';
+    }
+    if(valeur == 2){
+        lettre = 'B';
+    }
+    if(valeur == 3){
+        lettre = 'C';
+    }
+    if(valeur == 4){
+        lettre = 'D';
+    }
+    if(valeur == 5){
+        lettre = 'E';
+    }
+    if(valeur == 6){
+        lettre = 'F';
+    }
+    if(valeur == 7){
+        lettre = 'G';
+    }
+    if(valeur == 8){
+        lettre = 'H';
+    }
+    if(valeur == 9){
+        lettre = 'I';
+    }
+    if(valeur == 27){
+        lettre = 'J';
+    }
+    if(valeur == 10){
+        lettre = 'K';
+    }
+    if(valeur == 11){
+        lettre = 'L';
+    }
+    if(valeur == 12){
+        lettre = 'M';
+    }
+    if(valeur == 13){
+        lettre = 'N';
+    }
+    if(valeur == 26){
+        lettre = 'O';
+    }
+    if(valeur == 14){
+        lettre = 'P';
+    }
+    if(valeur == 15){
+        lettre = 'Q';
+    }
+    if(valeur == 16){
+        lettre = 'R';
+    }
+    if(valeur == 17){
+        lettre = 'S';
+    }
+    if(valeur == 18){
+        lettre = 'T';
+    }
+    if(valeur == 24){
+        lettre = 'U';
+    }
+    if(valeur == 19){
+        lettre = 'V';
+    }
+    if(valeur == 20){
+        lettre = 'W';
+    }
+    if(valeur == 21){
+        lettre = 'X';
+    }
+    if(valeur == 22){
+        lettre = 'Y';
+    }
+    if(valeur == 23){
+        lettre = 'Z';
+    }
+    if(valeur == 25){
+        lettre = '*';
+    }
+    return lettre;
 }

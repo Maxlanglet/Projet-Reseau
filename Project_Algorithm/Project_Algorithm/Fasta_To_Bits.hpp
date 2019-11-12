@@ -9,14 +9,7 @@
 #ifndef Fasta_To_Bits_hpp
 #define Fasta_To_Bits_hpp
 
-#include <iostream>
-#include <fstream>
-#include <bitset>
-#include <string>
-#include <sstream>
-#include <cstdio>
-
-using namespace std;
+#include "Score.hpp"
 
 string string_To_Bits(string text);
 string Fasta_To_Bits(ifstream &input);

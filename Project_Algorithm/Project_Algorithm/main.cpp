@@ -24,7 +24,7 @@ int main(int argc, const char * argv[]) {
     ifstream input("/Users/langletmaxime/Desktop/P4/C++/swipe/P00533.fasta");
     ifstream dna("/Users/langletmaxime/Desktop/P4/C++/swipe/uniprot_sprot.fasta.psq");
     bits = Fasta_To_Bits(input);
-    //cout << Bits_To_Text(bits) << endl;
-    cout << comparaison_De_Sequence(dna, bits) << endl;
+    cout << Bits_To_Text(bits) << endl;
+    //cout << comparaison_De_Sequence(dna, bits) << endl;
     return 0;
 }

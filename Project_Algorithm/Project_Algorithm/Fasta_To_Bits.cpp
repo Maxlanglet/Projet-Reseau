@@ -11,13 +11,16 @@
 
 string string_To_Bits(string text){
     string textBinaire("");
+    textBinaire = Score(text);
+    /*
     char lettre = '\0';
     int i =0;
     while(i!=text.size()){
         lettre = text[i];
-        textBinaire += bitset<8>(lettre).to_string();
+        textBinaire += Score(lettre);
         i++;
     }
+    */
     //cout << textBinaire << endl;
     return textBinaire;
 }
