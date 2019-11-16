@@ -14,4 +14,5 @@
 string string_To_Bits(string text);
 string Fasta_To_Bits(ifstream &input);
 
+
 #endif /* Fasta_To_Bits_hpp */
