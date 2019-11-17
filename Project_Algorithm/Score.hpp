@@ -16,6 +16,8 @@
 #include <string>
 #include <sstream>
 #include <cstdio>
+#include <string.h>
+#include <arpa/inet.h>
 
 using namespace std;
 

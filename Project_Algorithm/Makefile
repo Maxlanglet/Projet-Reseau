@@ -1,5 +1,7 @@
-main: main.o Fasta_To_Bits.o Bits_To_Text.o Score.o
-	g++ main.o Fasta_To_Bits.o Bits_To_Text.o Score.o -o main
+all: main clean
+
+main: main.o Fasta_To_Bits.o Bits_To_Text.o Score.o ouverture.o
+	g++ main.o Fasta_To_Bits.o Bits_To_Text.o Score.o ouverture.o -o main
 
 Bits_To_Text.o: Bits_To_Text.cpp Bits_To_Text.hpp
 	g++ -c Bits_To_Text.cpp
@@ -10,8 +12,8 @@ Fasta_To_Bits.o: Fasta_To_Bits.cpp Fasta_To_Bits.hpp
 Score.o: Score.cpp Score.hpp
 	g++ -c Score.cpp
 
-ouverture:
-	g++ -o ouverture ouverture.cpp
+ouverture.o: ouverture.cpp ouverture.hpp
+	g++ -c ouverture.cpp
 
 clean:
-	rm *.o
+	rm -f *.o
