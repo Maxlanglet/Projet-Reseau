@@ -11,5 +11,5 @@
 
 #include "Bits_To_Text.hpp"
 
-string toBin(int dec);
+char* read_psq( ifstream &file, int j);
 #endif /* ouverture_hpp */

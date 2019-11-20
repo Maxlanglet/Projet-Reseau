@@ -23,11 +23,15 @@ int main(int argc, const char * argv[]) {
     //ifstream input(argv[1]);
     string bits;
     ifstream input("/Users/langletmaxime/Desktop/P4/C++/swipe/P00533.fasta");
-    //ifstream dna("/Users/langletmaxime/Desktop/P4/C++/swipe/uniprot_sprot.fasta.psq");
-    bits = Fasta_To_Bits(input);
-    cout << Bits_To_Text(bits) << endl;
+    ifstream file("/Users/langletmaxime/Desktop/P4/C++/swipe/uniprot_sprot.fasta.psq");
+    char* buffer = read_psq(file, 500);
+    for (int i=0; i<500; i++) {
+        cout << score_Inverse(buffer[i]);
+    }
+    //bits = Fasta_To_Bits(input);
+    //cout << Bits_To_Text(bits) << endl;
     //cout << comparaison_De_Sequence(dna, bits) << endl;
-    
+    /*
     int version, type1, type2, type3, type4, title_lenght;
     string test = "a";
     
@@ -53,9 +57,9 @@ int main(int argc, const char * argv[]) {
         //f.read ((char *)&type4, 8);
         //f.read ((char *)&title_lenght, 1);
         
-        /**for (i = 0; i < 6; i++){
+        for (i = 0; i < 6; i++){
             f.read ((char *)&t1[i], sizeof(int));
-     }**/
+     }
     }
     f.close();
     
@@ -68,17 +72,17 @@ int main(int argc, const char * argv[]) {
     //cout << "int size " << sizeof(a) << endl;
     //cout << "double size " << sizeof(b) << endl;
     
-    /**for (i = 0; i < 6; i++){
+    for (i = 0; i < 6; i++){
         cout << t1 [i] << endl;
-    } **/
+    }
     
     cout << "version "<< toBin(version) <<endl;
     cout << "type1 "<< toBin(type1) << endl
-    /**<< "type2 "<< toBin(type2) << endl
+    << "type2 "<< toBin(type2) << endl
     << "type3 "<< toBin(type3) << endl
-    << "type4 "<< toBin(type1) << endl**/;
+    << "type4 "<< toBin(type1) << endl;
     //cout << "longeur titre "<< toBin(title_lenght) <<endl;
     
-    
+    */
     return 0;
 }
