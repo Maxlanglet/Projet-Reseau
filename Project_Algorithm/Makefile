@@ -12,5 +12,8 @@ Score.o: Score.cpp Score.hpp
 ouverture.o: ouverture.cpp ouverture.hpp
 	g++ -c ouverture.cpp
 
+comparaison.o: comparaison.cpp comparaison.hpp
+	g++ -c comparaison.cpp
+
 clean:
 	rm -f *.o
