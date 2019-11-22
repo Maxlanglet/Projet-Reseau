@@ -48,7 +48,7 @@ string Fasta_To_Bits(ifstream &input){  //Il faudra changer le void en string ap
         while(getline(input, ligne)){
             if(ligne.empty() || ligne[0]=='>'){
                 if(!nom.empty()){
-                    cout << nom << ":" << contenu << endl;
+                    //cout << nom << ":" << contenu << endl;
                     nom.clear();
                 }
                 if(!ligne.empty()){
@@ -66,16 +66,18 @@ string Fasta_To_Bits(ifstream &input){  //Il faudra changer le void en string ap
                 }
             }
         }
+        /*
         if(!nom.empty()){
-            cout << nom << ":" << contenu << endl;
+            //cout << nom << ":" << contenu << endl;
             //cout << nom << ":" << string_To_Bits(contenu) << endl;
-            return string_To_Bits(contenu);
+            //return contenu;
         }
+         */
     }
     else{
         string pasouvert("Pas ouvert");
         cout << "Erreur dans l'ouverture du fichier"<<endl;
         return pasouvert;
     }
-    return string_To_Bits(contenu);
+    return contenu;
 }

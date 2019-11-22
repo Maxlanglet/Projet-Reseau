@@ -11,7 +11,7 @@
 
 #include "Fasta_To_Bits.hpp"
 
-char* read_psq( ifstream &file, int j);
+vector<char> read_psq( ifstream &file);
 vector<int> header_offset(ifstream &file);
 vector<int> sequence_offset(ifstream &file);
 #endif /* ouverture_hpp */

@@ -9,6 +9,7 @@
 #include "Fasta_To_Bits.hpp"
 #include "Score.hpp"
 #include "ouverture.hpp"
+#include "comparaison.hpp"
 
 
 int main(int argc, const char * argv[]) {
@@ -24,74 +25,13 @@ int main(int argc, const char * argv[]) {
     ifstream input("/Users/langletmaxime/Desktop/P4/C++/swipe/P00533.fasta");
     ifstream input2("/Users/langletmaxime/Desktop/P4/C++/swipe/uniprot_sprot.fasta.pin");
     ifstream file("/Users/langletmaxime/Desktop/P4/C++/swipe/uniprot_sprot.fasta.psq");
-    char* buffer = read_psq(file, 500);
-    for (int i=0; i<500; i++) {
-        cout << score_Inverse(buffer[i]);
-    }
+    vector<char> buffer = read_psq(file);
     cout<<endl;
     vector<int> header_offsets;
     vector<int> sequence_offsets;
     header_offsets = header_offset(input2);
     sequence_offsets = sequence_offset(input2);
-    int n = header_offsets.size();
-    cout << header_offsets[n-1] << endl;
-    cout << sequence_offsets[0] << endl;
-    cout << sequence_offsets.size()+header_offsets.size() << endl;
-    //bits = Fasta_To_Bits(input);
-    //cout << Bits_To_Text(bits) << endl;
-    //cout << comparaison_De_Sequence(dna, bits) << endl;
-    /*
-    int version, type1, type2, type3, type4, title_lenght;
-    string test = "a";
-    
-    if(argc != 2){
-        cout << "argument incorrect" << endl;
-        return EXIT_FAILURE;
-    }
-    
-    
-    string fichier = argv[1];
-    
-    ifstream f(fichier, ios::in | ios::binary);
-    
-    if(!f.is_open()){
-        cout << "erreur, impossible d'ouvrir le fichier" << endl;
-    }
-    else {
-        
-        f.read ((char *)&version, sizeof(int));
-        f.read ((char *)&type1, 8);
-        //f.read ((char *)&type2, 8);
-        //f.read ((char *)&type3, 8);
-        //f.read ((char *)&type4, 8);
-        //f.read ((char *)&title_lenght, 1);
-        
-        for (i = 0; i < 6; i++){
-            f.read ((char *)&t1[i], sizeof(int));
-     }
-    }
-    f.close();
-    
-    
-    
-    cout << "version=" << version << endl
-    << "type(pb)=" << type1  << endl
-    << "longueur du titre= " << title_lenght << endl;
-    //<< "mot= " << mot << endl;
-    //cout << "int size " << sizeof(a) << endl;
-    //cout << "double size " << sizeof(b) << endl;
-    
-    for (i = 0; i < 6; i++){
-        cout << t1 [i] << endl;
-    }
-    
-    cout << "version "<< toBin(version) <<endl;
-    cout << "type1 "<< toBin(type1) << endl
-    << "type2 "<< toBin(type2) << endl
-    << "type3 "<< toBin(type3) << endl
-    << "type4 "<< toBin(type1) << endl;
-    //cout << "longeur titre "<< toBin(title_lenght) <<endl;
-    
-    */
+    bits = Fasta_To_Bits(input);
+    Sequence_comp(bits, buffer, sequence_offsets, header_offsets);
     return 0;
 }

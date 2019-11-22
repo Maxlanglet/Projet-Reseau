@@ -20,9 +20,13 @@
 //using std::ofstream;
 using namespace std;
 
-char* read_psq( ifstream &file, int j){
-    char* buffer = new char[j];
-    file.read(buffer, j);  // lit 100 bytes
+vector<char> read_psq( ifstream &file){
+    vector<char> buffer;
+    int buf;
+    while (!file.eof()) {
+        file.read(reinterpret_cast<char*>(&buf), sizeof(char));//embiguité soit buf doit etre un int ou un char je sais pas
+        buffer.push_back(buf);
+    }
     return buffer;
 }
 /*
@@ -33,7 +37,13 @@ char* buffer = new char[100];
 file.read(buffer, 100);  // lit 100 bytes
 cout << (int)(buffer[0]) << endl;  a iterer
 */
-
+/*
+char* read_psq( ifstream &file, int j){ //code initial de read_psq je le garde juste au cas ou
+    char* buffer = new char[j];
+    file.read(buffer, j);  // lit 100 bytes
+    return buffer;
+}
+*/
 vector<int> header_offset(ifstream &file){
     vector<int> buffer;
     int i = 0;
