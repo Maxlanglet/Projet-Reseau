@@ -8,7 +8,6 @@
 
 #include "Fasta_To_Bits.hpp"
 #include "Score.hpp"
-#include "Bits_To_Text.hpp"
 #include "ouverture.hpp"
 
 
@@ -23,11 +22,21 @@ int main(int argc, const char * argv[]) {
     //ifstream input(argv[1]);
     string bits;
     ifstream input("/Users/langletmaxime/Desktop/P4/C++/swipe/P00533.fasta");
+    ifstream input2("/Users/langletmaxime/Desktop/P4/C++/swipe/uniprot_sprot.fasta.pin");
     ifstream file("/Users/langletmaxime/Desktop/P4/C++/swipe/uniprot_sprot.fasta.psq");
     char* buffer = read_psq(file, 500);
     for (int i=0; i<500; i++) {
         cout << score_Inverse(buffer[i]);
     }
+    cout<<endl;
+    vector<int> header_offsets;
+    vector<int> sequence_offsets;
+    header_offsets = header_offset(input2);
+    sequence_offsets = sequence_offset(input2);
+    int n = header_offsets.size();
+    cout << header_offsets[n-1] << endl;
+    cout << sequence_offsets[0] << endl;
+    cout << sequence_offsets.size()+header_offsets.size() << endl;
     //bits = Fasta_To_Bits(input);
     //cout << Bits_To_Text(bits) << endl;
     //cout << comparaison_De_Sequence(dna, bits) << endl;

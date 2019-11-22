@@ -18,6 +18,7 @@
 #include <cstdio>
 #include <string.h>
 #include <arpa/inet.h>
+#include <vector>
 
 using namespace std;
 

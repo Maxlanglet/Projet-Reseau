@@ -9,7 +9,9 @@
 #ifndef ouverture_hpp
 #define ouverture_hpp
 
-#include "Bits_To_Text.hpp"
+#include "Fasta_To_Bits.hpp"
 
 char* read_psq( ifstream &file, int j);
+vector<int> header_offset(ifstream &file);
+vector<int> sequence_offset(ifstream &file);
 #endif /* ouverture_hpp */
