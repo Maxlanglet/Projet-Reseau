@@ -1,7 +1,7 @@
 all: main clean
 
-main: main.o Fasta_To_Bits.o Score.o ouverture.o
-	g++ main.o Fasta_To_Bits.o Score.o ouverture.o -o main
+main: main.o Fasta_To_Bits.o Score.o ouverture.o comparaison.o
+	g++ main.o Fasta_To_Bits.o Score.o ouverture.o comparaison.o -o main
 
 Fasta_To_Bits.o: Fasta_To_Bits.cpp Fasta_To_Bits.hpp
 	g++ -c Fasta_To_Bits.cpp
