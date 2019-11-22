@@ -9,6 +9,7 @@
 #include "comparaison.hpp"
 
 bool Sequence_comp(string fichier_fasta, vector<char> fichier_psq, vector<int> sequence_offset, vector<int> header_offset){
+    int h=0;
     for (int i=0; i<sequence_offset.size(); i++) {
         int k=0;
         int offset = sequence_offset[i];
@@ -27,8 +28,12 @@ bool Sequence_comp(string fichier_fasta, vector<char> fichier_psq, vector<int> s
             }
             cout<<endl;
             cout << "Offset de la sequence :" << offset << endl;
+            h++;
             break;
         }
+    }
+    if (h==0) {
+        cout << "Aucune séquence trouvée" << endl;
     }
     return true;
 }

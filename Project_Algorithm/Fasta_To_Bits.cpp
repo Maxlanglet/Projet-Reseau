@@ -9,24 +9,7 @@
 #include "Fasta_To_Bits.hpp"
 
 
-string string_To_Bits(string text){
-    string textBinaire("");
-    textBinaire = Score(text);
-    /*
-    char lettre = '\0';
-    int i =0;
-    while(i!=text.size()){
-        lettre = text[i];
-        textBinaire += Score(lettre);
-        i++;
-    }
-    */
-    //cout << textBinaire << endl;
-    return textBinaire;
-}
-
-
-string Fasta_To_Bits(ifstream &input){  //Il faudra changer le void en string apres pour comparaison
+string Fasta_To_String(ifstream &input){  //Il faudra changer le void en string apres pour comparaison
     /*
     Style de format FASTA :
      >Rosetta_Example_1

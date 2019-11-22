@@ -16,8 +16,6 @@
 #define bswap_64(x) OSSwapInt64(x)
 #endif
 
-//using std::ifstream;
-//using std::ofstream;
 using namespace std;
 
 vector<char> read_psq( ifstream &file){
@@ -29,14 +27,6 @@ vector<char> read_psq( ifstream &file){
     }
     return buffer;
 }
-/*
-VA TOUJOURS AVEC UN:
-ifstream file;
-file.open ("stuff.bin", ios::binary );
-char* buffer = new char[100];
-file.read(buffer, 100);  // lit 100 bytes
-cout << (int)(buffer[0]) << endl;  a iterer
-*/
 /*
 char* read_psq( ifstream &file, int j){ //code initial de read_psq je le garde juste au cas ou
     char* buffer = new char[j];
@@ -52,16 +42,11 @@ vector<int> header_offset(ifstream &file){
         file.read(reinterpret_cast<char*>(&myint), sizeof(int));
         buffer.push_back((int)(bswap_32(myint)));
         i++;
-        if (bswap_32(myint)==1 && i>=12) {
+        if (bswap_32(myint)==1 && i>=12) {//on regarde apres les 12 premiers éléments du fichier pin car sont les autres elements
             buffer.pop_back();//enleve le 1
             break;
         }
        }
-    /*
-    for (int j=0; j<i; j++) {
-        cout << (int)(buffer[j]) << endl;
-    }
-     */
     return buffer;
 }
 

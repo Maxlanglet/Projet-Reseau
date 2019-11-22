@@ -11,8 +11,7 @@
 
 #include "Score.hpp"
 
-string string_To_Bits(string text);
-string Fasta_To_Bits(ifstream &input);
+string Fasta_To_String(ifstream &input);
 
 
 #endif /* Fasta_To_Bits_hpp */
