@@ -25,6 +25,7 @@ int main(int argc, const char * argv[]) {
     ifstream input("/Users/langletmaxime/Desktop/P4/C++/swipe/P00533.fasta");
     ifstream input2("/Users/langletmaxime/Desktop/P4/C++/swipe/uniprot_sprot.fasta.pin");
     ifstream file("/Users/langletmaxime/Desktop/P4/C++/swipe/uniprot_sprot.fasta.psq");
+    ifstream file2("/Users/langletmaxime/Desktop/P4/C++/swipe/uniprot_sprot.fasta.phr");
     chrono::time_point<chrono::system_clock> start, end;
     start = std::chrono::system_clock::now();
     vector<char> buffer = read_psq(file);
@@ -34,10 +35,11 @@ int main(int argc, const char * argv[]) {
     header_offsets = header_offset(input2);
     sequence_offsets = sequence_offset(input2);
     bits = Fasta_To_String(input);
-    Sequence_comp(bits, buffer, sequence_offsets, header_offsets);
+    Sequence_comp(bits, buffer, sequence_offsets, header_offsets, file2);
     end = std::chrono::system_clock::now();
     int elapsed_seconds = chrono::duration_cast<chrono::milliseconds>(end-start).count();
     cout << "elapsed time: " << elapsed_seconds << "s\n";
+    cout << header_offsets.size() << sequence_offsets.size() << endl;
     input.close();
     input2.close();
     file.close();

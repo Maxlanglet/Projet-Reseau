@@ -8,7 +8,7 @@
 
 #include "comparaison.hpp"
 
-bool Sequence_comp(string fichier_fasta, vector<char> fichier_psq, vector<int> sequence_offset, vector<int> header_offset){
+bool Sequence_comp(string fichier_fasta, vector<char> fichier_psq, vector<int> sequence_offset, vector<int> header_offset, ifstream &file){
     int h=0;
     for (int i=0; i<sequence_offset.size(); i++) {
         int k=0;
@@ -20,6 +20,7 @@ bool Sequence_comp(string fichier_fasta, vector<char> fichier_psq, vector<int> s
             }
         }
         if (k==0) {
+            acquiert(header_offset[i], file);
             cout << "Sequence trouvée :" << endl;
             cout << fichier_fasta << endl;
             cout << "Sequence dans psq :" << endl;
