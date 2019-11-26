@@ -21,7 +21,7 @@ bool Sequence_comp(string fichier_fasta, vector<char> fichier_psq, vector<int> s
         }
         if (k==0) {
             acquiert(header_offset[i], file);
-            cout << "Sequence trouvée :" << endl;
+            cout << "Sequence dans fasta :" << endl;
             cout << fichier_fasta << endl;
             cout << "Sequence dans psq :" << endl;
             for (int l = 0; l<fichier_fasta.size(); l++) {

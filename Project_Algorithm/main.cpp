@@ -39,7 +39,12 @@ int main(int argc, const char * argv[]) {
     end = std::chrono::system_clock::now();
     int elapsed_seconds = chrono::duration_cast<chrono::milliseconds>(end-start).count();
     cout << "elapsed time: " << elapsed_seconds << "s\n";
-    cout << header_offsets.size() << sequence_offsets.size() << endl;
+    //cout << header_offsets.size() << ":" << sequence_offsets.size() << endl;
+    //cout << header_offsets[0]<<":"<<sequence_offsets[0] << endl;
+    //cout << header_offsets[1]<<":"<<sequence_offsets[1] << endl;
+    //cout << header_offsets[header_offsets.size()-1]<<":"<<sequence_offsets[sequence_offsets.size()-1] << endl;
+    //cout << header_offsets[header_offsets.size()-2]<<":"<<sequence_offsets[sequence_offsets.size()-2] << endl;
+    //cout << header_offsets[header_offsets.size()-3]<<":"<<sequence_offsets[sequence_offsets.size()-3] << endl;
     input.close();
     input2.close();
     file.close();

@@ -57,7 +57,7 @@ vector<int> header_offset(ifstream &file){
         }
        }
     //buffer.insert(buffer.begin(), 0);//ajoute le 0
-    v2 = vector<int>(buffer.begin() + offset, buffer.end());
+    v2 = vector<int>(buffer.begin() + offset, buffer.end()); //probleme dans les vecteurs de taille diff 1
     return v2;
 }
 
@@ -75,6 +75,7 @@ vector<int> sequence_offset(ifstream &file){
         }
        }
     buffer.insert(buffer.begin(), 1);//ajoute le 1
+    buffer.pop_back(); //apparement lit 2 fois le dernier je sais pas pq du coup voir assistant
     return buffer;
 }
 
