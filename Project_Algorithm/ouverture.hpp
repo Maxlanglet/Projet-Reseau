@@ -17,4 +17,5 @@ vector<int> sequence_offset(ifstream &file);
 string read_string(ifstream* f);
 int read_int(ifstream* f);
 void acquiert(int offset, ifstream &f);
+int Hex_Int(string hex, int size);
 #endif /* ouverture_hpp */
