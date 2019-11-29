@@ -18,14 +18,19 @@ int main(int argc, const char * argv[]) {
         cout << "Argument demandé :" << argv[0]<<" [fichier] "<<endl;
         return 1;
     }
-    */
+     */
+
     
     //ifstream input(argv[1]);
     string bits;
-    ifstream input("/Users/langletmaxime/Desktop/P4/C++/swipe/P00533.fasta");
-    ifstream input2("/Users/langletmaxime/Desktop/P4/C++/swipe/uniprot_sprot.fasta.pin");
-    ifstream file("/Users/langletmaxime/Desktop/P4/C++/swipe/uniprot_sprot.fasta.psq");
-    ifstream file2("/Users/langletmaxime/Desktop/P4/C++/swipe/uniprot_sprot.fasta.phr");
+    //ifstream input("/Users/langletmaxime/Desktop/P4/C++/swipe/P00533.fasta");
+    //ifstream input2("/Users/langletmaxime/Desktop/P4/C++/swipe/uniprot_sprot.fasta.pin");
+    //ifstream file("/Users/langletmaxime/Desktop/P4/C++/swipe/uniprot_sprot.fasta.psq");
+    //ifstream file2("/Users/langletmaxime/Desktop/P4/C++/swipe/uniprot_sprot.fasta.phr");
+    ifstream input(argv[1]);
+    ifstream input2(argv[2]);
+    ifstream file(argv[3]);
+    ifstream file2(argv[4]);
     chrono::time_point<chrono::system_clock> start, end;
     start = std::chrono::system_clock::now();
     vector<char> buffer = read_psq(file);
