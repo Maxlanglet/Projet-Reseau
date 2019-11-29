@@ -126,7 +126,7 @@ string read_string(ifstream* f){
         string mystr = ss.str();
         
         size = Hex_Int(mystr, size2);
-        delete buffer;
+        delete[] buffer;
         
     }
     
@@ -150,9 +150,9 @@ int read_int(ifstream* f){
     }
     string mystr = ss.str();
     res = Hex_Int(mystr, (int)size);
-    cout<<"int : "<< res << endl;
+    //cout<<"int : "<< res << endl;
     
-    delete buffer;
+    delete[] buffer;
     
     return res;
 }
