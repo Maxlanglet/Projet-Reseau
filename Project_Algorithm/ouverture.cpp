@@ -9,6 +9,7 @@
 #include "ouverture.hpp"
 #ifdef __linux__
 #include <byteswap.h>
+
 #elif defined(__APPLE__)
 #include <libkern/OSByteOrder.h>
 #define bswap_16(x) OSSwapInt16(x)
@@ -108,30 +109,108 @@ void acquiert(int offset, ifstream &f){
 string read_string(ifstream* f){
     string res = "";
     //cout << "position string : " << f->tellg() << endl;
-    char size;
-    f->read(&size, 1);
+    int size = 0;
+    f->read((char*)&size, 1);
     //cout << "taille string : " << int(size) << endl;
-    char* text = new char[int(size)];
+    
+    if(int(size) >= 128){
+        
+        int size2 = (size-128);
+        char* buffer = new char[size2];
+        f-> read(buffer,size2);
+        
+        stringstream ss;
+        for(int i =0; i<size2; i++){
+            ss<<setfill('0')<<setw(2)<<hex<<(0xff & (int)buffer[i]);
+        }
+        string mystr = ss.str();
+        
+        size = Hex_Int(mystr, size2);
+        delete buffer;
+        
+    }
+    
+    char* text = new char[size];
     f->read(text, int(size));
-    cout << ">" << text << endl;
-    res = text;
+    res = string(text,size);
+    cout << ">" << res << endl;
     return res;
 }
 
 int read_int(ifstream* f){
     int res = 0;
-    //cout << "position int : " << f->tellg() << endl;
-    char size;
+    char size = '0';
     f->read(&size,1);
-    //cout << "taille int : " << int(size) << endl;
-    //cout << "position int : " << f->tellg() << endl;
-    int buffer;
-    f-> read((char*)&buffer, int(size));
-    bswap_64(buffer);
+    char* buffer = new char[(int)size];
+    f-> read(buffer, int(size));
     
-    cout<<"int : "<< buffer << endl;
+    stringstream ss;
+    for(int i = 0;i<(int)size;i++){
+        ss<<setfill('0')<<setw(2)<<hex<<(0xff & (int)buffer[i]);
+    }
+    string mystr = ss.str();
+    res = Hex_Int(mystr, (int)size);
+    cout<<"int : "<< res << endl;
     
-    res = buffer;
+    delete buffer;
     
+    return res;
+}
+
+int Hex_Int(string hex, int size){
+    size = 2*size;
+    int res =0;
+    for (int i = 0; i<size;i++){
+        switch(hex[i]){
+            case '0' :
+                res += 0;
+                break;
+            case '1' :
+                res += 1*pow(16,size-1-i);
+                break;
+            case '2' :
+                res += 2*pow(16,size-1-i);
+                break;
+            case '3' :
+                res += 3*pow(16,size-1-i);
+                break;
+            case '4' :
+                res += 4*pow(16,size-1-i);
+                break;
+            case '5' :
+                res += 5*pow(16,size-1-i);
+                break;
+            case '6' :
+                res += 6*pow(16,size-1-i);
+                break;
+            case '7' :
+                res += 7*pow(16,size-1-i);
+                break;
+            case '8' :
+                res += 8*pow(16,size-1-i);
+                break;
+            case '9' :
+                res += 9*pow(16,size-1-i);
+                break;
+            case 'a' :
+                res += 10*pow(16,size-1-i);
+                break;
+            case 'b' :
+                res += 11*pow(16,size-1-i);
+                break;
+            case 'c' :
+                res += 12*pow(16,size-1-i);
+                break;
+            case 'd' :
+                res += 13*pow(16,size-1-i);
+                break;
+            case 'e' :
+                res += 14*pow(16,size-1-i);
+                break;
+            case 'f' :
+                res += 15*pow(16,size-1-i);
+                break;
+        }
+    }
     return res;
 }

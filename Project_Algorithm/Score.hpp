@@ -10,6 +10,8 @@
 #define Score_hpp
 
 
+#include <iomanip>
+#include <cmath>
 #include <iostream>
 #include <fstream>
 #include <bitset>
