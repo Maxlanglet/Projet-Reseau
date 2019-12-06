@@ -1,57 +1,7 @@
-//
-//  main.cpp
-//  Project_Algorithm
-//
-//  Created by Langlet Maxime on 01/11/2019.
-//  Copyright © 2019 Langlet Maxime. All rights reserved.
-//
+#include "binaire.h"
 
-#include "Fasta_To_Bits.hpp"
-#include "Score.hpp"
-#include "ouverture.hpp"
-#include "comparaison.hpp"
-
-
-int main(int argc, const char * argv[]) {
-    /*
-    if(argc<=1){
-        cout << "Argument demandé :" << argv[0]<<" [fichier] "<<endl;
-        return 1;
-    }
-     */
-
-    
-    //ifstream input(argv[1]);
-    string bits;
-    //ifstream input("/Users/langletmaxime/Desktop/P4/C++/swipe/P00533.fasta");
-    //ifstream input2("/Users/langletmaxime/Desktop/P4/C++/swipe/uniprot_sprot.fasta.pin");
-    //ifstream file("/Users/langletmaxime/Desktop/P4/C++/swipe/uniprot_sprot.fasta.psq");
-    //ifstream file2("/Users/langletmaxime/Desktop/P4/C++/swipe/uniprot_sprot.fasta.phr");
-    ifstream input(argv[1]);
-    ifstream input2(argv[2]);
-    ifstream file(argv[3]);
-    ifstream file2(argv[4]);
-    chrono::time_point<chrono::system_clock> start, end;
-    start = std::chrono::system_clock::now();
-    vector<char> buffer = read_psq(file);
-    cout<<endl;
-    vector<int> header_offsets;
-    vector<int> sequence_offsets;
-    header_offsets = header_offset(input2);
-    sequence_offsets = sequence_offset(input2);
-    bits = Fasta_To_String(input);
-    Sequence_comp(bits, buffer, sequence_offsets, header_offsets, file2);
-    end = std::chrono::system_clock::now();
-    int elapsed_seconds = chrono::duration_cast<chrono::milliseconds>(end-start).count();
-    cout << "elapsed time: " << elapsed_seconds << "s\n";
-    //cout << header_offsets.size() << ":" << sequence_offsets.size() << endl;
-    //cout << header_offsets[0]<<":"<<sequence_offsets[0] << endl;
-    //cout << header_offsets[1]<<":"<<sequence_offsets[1] << endl;
-    //cout << header_offsets[header_offsets.size()-1]<<":"<<sequence_offsets[sequence_offsets.size()-1] << endl;
-    //cout << header_offsets[header_offsets.size()-2]<<":"<<sequence_offsets[sequence_offsets.size()-2] << endl;
-    //cout << header_offsets[header_offsets.size()-3]<<":"<<sequence_offsets[sequence_offsets.size()-3] << endl;
-    input.close();
-    input2.close();
-    file.close();
-    return 0;
+int main(int argc, char * argv[]){
+	Binaire bin("uniprot_sprot.fasta.phr");
+	bin.open_fichier();
+	bin.test_fichier();	
 }
