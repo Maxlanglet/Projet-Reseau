@@ -36,6 +36,6 @@ void Binaire::test_fichier(){
 	}
 }
 
-void Binaire::close_fichier(ifstream fichier){
-	fichier.close();
+void Binaire::close_fichier(){
+	f.close();
 }
