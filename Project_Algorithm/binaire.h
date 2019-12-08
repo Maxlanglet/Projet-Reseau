@@ -1,12 +1,15 @@
 #include <string>
 #include <fstream>
 #include <iostream>
+#include <sstream>
+#include <iomanip>
+#include <cmath>
 using namespace std;
 class Binaire
 {
 private :
 	string adresse;
-	ifstream f;
+	
 	
 public : 
 	Binaire(string adr);
@@ -14,5 +17,6 @@ public :
 	string getAdresse();
 	void open_fichier();
 	void test_fichier();
-	void close_fichier(ifstream fichier);
+	void close_fichier();
+	ifstream f;
 };
