@@ -1,4 +1,7 @@
-#include "binaire.h"
+#ifndef header_h
+#define header_h
+
+#include "Offsets.hpp"
 
 class Header : public Binaire
 {
@@ -19,3 +22,4 @@ public :
 	
 	
 };
+#endif
