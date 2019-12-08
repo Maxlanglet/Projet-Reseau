@@ -93,7 +93,6 @@ void swipe(string fasta, vector<char> psq, int offset1, int offset2){
     int posi=0;
     int posj=0;
     int max=0;
-
     vector<vector<int> > mat(fasta.size(), vector<int>(offset2-offset1, 0));//TODO: meilleur choix avec matrice et memoisation de je sais pas quoi, comme pas possible de faire int [truc variable] il faut passer par des pointeurs je pense
     for (int i =1; i<fasta.size(); i++) {
         posi=get_pos(fasta[i-1]);
