@@ -28,6 +28,7 @@ public:
     void offset();
     //void get_seq_offsets();
     int get_seq_offset(int pos);
+    unsigned long get_size();
     Offsets(string adr);
 private:
     string adresse;

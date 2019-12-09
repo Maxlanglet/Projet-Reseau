@@ -11,17 +11,21 @@
 
 #include "header.h"
 
-class swipe{
+class Swipe{
 public:
-    //void lireBlosum(const char blosum);
-    void get_pos(char prot);
-    swipe();
-    void Algo();
+    int get_pos(char prot);
+    int get_blosum(int i, int j);
+    Swipe();
+    void Algo(string fasta, vector<char> psq, int offset1, int offset2);
+    int findMax(int array[], int longueur);
 private:
-    
+    //peut etre mettre matrice et resize a chaque fois dans l'algo
+    //vector<vector<int>> mat;
 };
-int get_pos(char prot);
-void swipe(string fasta, vector<char> psq, int offset1, int offset2);
+
+
+//int get_pos(char prot);
+//void swipe(string fasta, vector<char> psq, int offset1, int offset2);
 
 
 #endif /* SwipeAlgo_hpp */

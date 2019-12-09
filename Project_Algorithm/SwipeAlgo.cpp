@@ -6,9 +6,17 @@
 //  Copyright © 2019 Langlet Maxime. All rights reserved.
 //
 
-#include "blosum.hpp"
+#include "SwipeAlgo.hpp"
 
-int get_pos(char prot){
+Swipe::Swipe(){// :  mat()
+}
+
+
+int Swipe::get_blosum(int i, int j){
+    return blosum(i,j);
+}
+
+int Swipe::get_pos(char prot){
     int pos=0;
     if (prot=='A') {
         pos=0;
@@ -87,39 +95,76 @@ int get_pos(char prot){
     }
     return pos;
 }
+
+int Swipe::findMax(int array[], int longueur){
+    int max = array[0];
+    int ind = 0;
+    for(int i=1; i<longueur; i++){
+        if(array[i] > max){
+            max = array[i];
+            ind=i;
+        }
+    }
+    return max;
+}
+
+
 //TODO: Pas finis mais deja un debut
-void swipe(string fasta, vector<char> psq, int offset1, int offset2){
-    cout << "lancement swipe" << endl;
+void Swipe::Algo(string fasta, vector<char> psq, int offset1, int offset2){
     int posi=0;
     int posj=0;
     int max=0;
-    vector<vector<int> > mat(fasta.size(), vector<int>(offset2-offset1, 0));//TODO: meilleur choix avec matrice et memoisation de je sais pas quoi, comme pas possible de faire int [truc variable] il faut passer par des pointeurs je pense
-    for (int i =1; i<fasta.size(); i++) {
-        posi=get_pos(fasta[i-1]);
-        for (int j =1; j<offset2-offset1; j++) {
-            int maxlocal=0;
-            posj=get_pos(score_Inverse(psq[j+offset1]));
-            int score = mat[i][j-1] -11;
-            if (score>maxlocal) {
-                maxlocal = score;
-            }
-            score = mat[i-1][j]-11;
-            if (score>maxlocal) {
-                maxlocal = score;
-            }
-            int alignement = get_blosum(posi, posj);
-            score = mat[i-1][j-1] + alignement;
-            if (score>maxlocal) {
-                maxlocal = score;
-            }
-            mat[i][j] = maxlocal;
-            
-            if (maxlocal>max) {
-                max = maxlocal;
-            }
-            //cout << maxlocal << endl;
+    unsigned long ligne = fasta.size();
+    int colonne = offset2-offset1;
+    
+    int mat[ligne+1][colonne+1];
+    
+    for(int i=0;i<=ligne;i++){
+        for(int j=0;j<=colonne;j++){
+            mat[i][j]=0;
         }
     }
-    cout << "score :"<< max << endl;
+    //mat.clear();
+    //mat.resize(fasta.size(), vector<int>(offset2-offset1));
+    //vector<vector<int> > mat(fasta.size(), vector<int>(offset2-offset1, 0));//TODO: meilleur choix avec matrice et memoisation de je sais pas quoi, comme pas possible de faire int [truc variable] il faut passer par des pointeurs je pense
+    /*
+    int **mat;
+    mat = (int **) malloc(fasta.size() * sizeof(int*));
+    for(int row = 0; row<fasta.size(); row++) {
+       mat[row] = (int *) malloc((offset2-offset1) * sizeof(int));
+    }
+    for (int i = 0; i<fasta.size(); i++) {
+        for (int j =0; j<offset2-offset1; j++) {
+            mat[i][j]=0;
+        }
+    }
+     */
+    
+    int memo[4];
+    for (int i =1; i<=fasta.size(); i++) {
+        posi=get_pos(fasta[i-1]);
+        for (int j =1; j<=offset2-offset1; j++) {
+            //ligne.clear();
+            posj=get_pos(score_Inverse(psq[j+offset1]));
+            
+            memo[0]=mat[i-1][j-1]+blosum(posi, posj);
+            memo[1]=mat[i-1][j]-11;
+            memo[2]=mat[i][j-1]-11;
+            memo[3]=0;
+            mat[i][j] = findMax(memo, 4);
+            if (mat[i][j]>max) {
+                max = mat[i][j];
+            }
+        }
+    }
+    double lambda = 0.267;
+    double Sbit = (max*lambda-3.34)/log(2);
+    cout << "score :"<< Sbit << endl;
+    /*
+    for(int row = 0; row<fasta.size(); row++) {
+        free(mat[row]);
+    }
+    free(mat);
+     */
 }
 //void swipe::lireBlosum(const char blosum)//si on a le choix pour les matrices BLOSUM alors on fait direct une map

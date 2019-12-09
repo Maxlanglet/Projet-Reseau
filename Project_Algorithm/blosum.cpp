@@ -9,7 +9,7 @@
 #include "blosum.hpp"
 //TODO: changer cette matrice mais plus rapide que vector de vector
 
-int get_blosum(int i, int j){
+int blosum(int i, int j){
     int blosum62[25][25] = {//vector< vector<int> > blosum62
         {4,-1,-2,-2,0,-1,-1,0,-2,-1,-1,-1,-1,-2,-1,1,0,-3,-2,0,-2,-1,-1,-1,-4},
         {-1,5,0,-2,-3,1,0,-2,0,-3,-2,2,-1,-3,-2,-1,-1,-3,-2,-3,-1,-2,0,-1,-4},

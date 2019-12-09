@@ -1,7 +1,7 @@
 #ifndef header_h
 #define header_h
 
-#include "Offsets.hpp"
+#include "blosum.hpp"
 
 class Header : public Binaire
 {

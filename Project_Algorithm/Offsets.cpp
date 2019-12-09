@@ -19,7 +19,7 @@ void Offsets::offset(){
     //header offset
     cout << "lecture pin head" << endl;
     head_offsets.clear();
-    vector<int> v2;
+    //vector<int> v2;
     //f.seekg(1,ios::beg); probleme ici mais du coup je sais pas comment faire pour lire au debut
     int j = 0;
     int myint2;
@@ -39,8 +39,8 @@ void Offsets::offset(){
        }
       }
     //buffer.insert(buffer.begin(), 0);//ajoute le 0
-    v2 = vector<int>(head_offsets.begin() + offset, head_offsets.end()); //probleme dans les vecteurs de taille diff 1
-    head_offsets = v2;
+    head_offsets = vector<int>(head_offsets.begin() + offset, head_offsets.end()); //probleme dans les vecteurs de taille diff 1
+    //head_offsets = v2;
     cout << "finis header" << endl;
        //return v2;
     
@@ -75,4 +75,8 @@ void Offsets::header_offset(){
 
 int Offsets::get_seq_offset(int pos){
     return seq_offsets[pos];
+}
+
+unsigned long Offsets::get_size(){
+    return seq_offsets.size();
 }

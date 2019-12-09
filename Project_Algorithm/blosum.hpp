@@ -11,7 +11,7 @@
 
 #include "Offsets.hpp"
 
-int get_blosum(int i, int j);
+int blosum(int i, int j);
 //Pas oublier de donner la possibilité de pouvoir changer 
 
 #endif /* blosum_hpp */
