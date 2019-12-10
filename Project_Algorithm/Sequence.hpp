@@ -17,11 +17,14 @@ public:
     Sequence(string adr);
     void get_sequence(int k = 0, int l = 100);
     string get_adresse();
-    vector<char> get_sequence2();
+    //vector<char> get_sequence2();
+    char* get_sequence2();
+    void del();
 private:
     //ifstream f;
     string adresse;
-    vector<char> sequence;
+    //vector<char> sequence;
+    char* sequence;
 };
 
 #endif /* Sequence_hpp */

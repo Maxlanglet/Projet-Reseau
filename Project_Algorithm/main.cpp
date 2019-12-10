@@ -80,18 +80,28 @@ int main(int argc, const char * argv[]) {
     //offsets.open_fichier();
     //offsets.header_offset();
     offsets.offset();
-    vector<char> seq = sequence.get_sequence2();
+    const char* seq = sequence.get_sequence2();
     cout << "lancement swipe" << endl;
-    for (int g = 1; g<offsets.get_size(); g++) {
-        int h = offsets.get_seq_offset(g-1);
-        int u = offsets.get_seq_offset(g);
-        chrono::time_point<chrono::system_clock> start, end;
-        start = std::chrono::system_clock::now();
+    double tempsmoyen = 0.0;
+    chrono::time_point<chrono::system_clock> start, end;
+    start = std::chrono::system_clock::now();
+    for (int g = 1; g<10000; g++) {//1878 pbm //offsets.get_size()
+        long h = offsets.get_seq_offset(g-1);
+        long u = offsets.get_seq_offset(g);
+        chrono::time_point<chrono::system_clock> start2, end2;
+        start2 = std::chrono::system_clock::now();
         swipe.Algo(fasta, seq, h, u);
-        end = std::chrono::system_clock::now();
-        double elapsed_seconds = chrono::duration_cast<chrono::milliseconds>(end-start).count();
-        cout << "elapsed time: " << elapsed_seconds << "s\n";
+        end2 = std::chrono::system_clock::now();
+        double elapsed_seconds2 = chrono::duration_cast<chrono::milliseconds>(end2-start2).count();
+        cout << "elapsed time: " << elapsed_seconds2 << "ms\n";
+        tempsmoyen += elapsed_seconds2;
+        cout << g << endl;
     }
+    //sequence.del();
+    end = std::chrono::system_clock::now();
+    double elapsed_seconds = chrono::duration_cast<chrono::seconds>(end-start).count();
+    cout << "elapsed time: " << elapsed_seconds << "s\n";
+    cout << "temps moyen par sequence: " << tempsmoyen/10000 << endl;
     //sequence.close_fichier();
     //offsets.close_fichier();
     return 0;

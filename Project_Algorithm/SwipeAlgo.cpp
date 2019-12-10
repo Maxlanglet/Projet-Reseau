@@ -110,20 +110,20 @@ int Swipe::findMax(int array[], int longueur){
 
 
 //TODO: Pas finis mais deja un debut
-void Swipe::Algo(string fasta, vector<char> psq, int offset1, int offset2){
+void Swipe::Algo(const string &fasta, const char* &psq, long offset1, long offset2){
     int posi=0;
     int posj=0;
     int max=0;
     unsigned long ligne = fasta.size();
-    int colonne = offset2-offset1;
-    
-    int mat[ligne+1][colonne+1];
-    
-    for(int i=0;i<=ligne;i++){
-        for(int j=0;j<=colonne;j++){
-            mat[i][j]=0;
-        }
-    }
+    unsigned long colonne = offset2-offset1;
+    //int mat[ligne+1][colonne+1];
+    vector<vector<int> > mat(ligne+1, vector<int>(colonne+1, 0));
+    //for(int i=0;i<=ligne;i++){
+        //mat[i][0]=0;
+    //}
+    //for(int j=0;j<=colonne;j++){
+        //mat[0][j]=0;
+    //}
     //mat.clear();
     //mat.resize(fasta.size(), vector<int>(offset2-offset1));
     //vector<vector<int> > mat(fasta.size(), vector<int>(offset2-offset1, 0));//TODO: meilleur choix avec matrice et memoisation de je sais pas quoi, comme pas possible de faire int [truc variable] il faut passer par des pointeurs je pense
@@ -141,19 +141,29 @@ void Swipe::Algo(string fasta, vector<char> psq, int offset1, int offset2){
      */
     
     int memo[4];
+    //cout << "pas pbm memo" << endl;
     for (int i =1; i<=fasta.size(); i++) {
         posi=get_pos(fasta[i-1]);
+        //cout << "pas pbm fasta" << endl;
+        //cout << posi << endl;
         for (int j =1; j<=offset2-offset1; j++) {
             //ligne.clear();
             posj=get_pos(score_Inverse(psq[j+offset1]));
-            
+            //cout << "pas pbm psq" << endl;
+            //cout << posj << endl;
             memo[0]=mat[i-1][j-1]+blosum(posi, posj);
+            //cout << "pas pbm memo0 ou blosum" << endl;
             memo[1]=mat[i-1][j]-11;
+            //cout << "pas pbm memo1" << endl;
             memo[2]=mat[i][j-1]-11;
+            //cout << "pas pbm memo2" << endl;
             memo[3]=0;
+            //cout << "pas pbm memo3" << endl;
             mat[i][j] = findMax(memo, 4);
+            //cout << "pas pbm findmax" << endl;
             if (mat[i][j]>max) {
                 max = mat[i][j];
+                //cout << "pas pbm max" << endl;
             }
         }
     }
