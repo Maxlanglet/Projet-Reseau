@@ -16,6 +16,8 @@
 #include "Offsets.hpp"
 #include "blosum.hpp"
 #include "header.h"
+#include <map>
+#include <iterator>
 
 
 int main(int argc, const char * argv[]) {
@@ -70,16 +72,18 @@ int main(int argc, const char * argv[]) {
      */
     //"/Users/langletmaxime/Desktop/P4/C++/swipe/uniprot_sprot.fasta.psq"
     //"/Users/langletmaxime/Desktop/P4/C++/swipe/uniprot_sprot.fasta.pin"
-    Sequence sequence("/Users/langletmaxime/Desktop/P4/C++/swipe/uniprot_sprot.fasta.psq");
-    Offsets offsets("/Users/langletmaxime/Desktop/P4/C++/swipe/uniprot_sprot.fasta.pin");
+    Sequence sequence("uniprot_sprot.fasta.psq");
+    Offsets offsets("uniprot_sprot.fasta.pin");
     Swipe swipe;
-    ifstream input("/Users/langletmaxime/Desktop/P4/C++/swipe/P00533.fasta");
+    ifstream input("P00533.fasta");
     string fasta = Fasta_To_String(input);
     //sequence.open_fichier();
     sequence.read_psq();
     //offsets.open_fichier();
     //offsets.header_offset();
     offsets.offset();
+    map<double, int> score_max;
+    double score = 0;
     const char* seq = sequence.get_sequence2();
     cout << "lancement swipe" << endl;
     double tempsmoyen = 0.0;
@@ -90,7 +94,16 @@ int main(int argc, const char * argv[]) {
         long u = offsets.get_seq_offset(g);
         chrono::time_point<chrono::system_clock> start2, end2;
         start2 = std::chrono::system_clock::now();
-        swipe.Algo(fasta, seq, h, u);
+        
+        score = swipe.Algo(fasta, seq, h, u);
+        if(score_max.size() < 20){
+            score_max.insert(pair<double, int>(score,g));
+        }
+        else if(score_max.size() == 20 && score_max.begin()->first < score){
+            score_max.erase(score_max.begin());
+            score_max.insert(pair<double, int>(score,g));
+        }
+        
         end2 = std::chrono::system_clock::now();
         double elapsed_seconds2 = chrono::duration_cast<chrono::milliseconds>(end2-start2).count();
         cout << "elapsed time: " << elapsed_seconds2 << "ms\n";
@@ -104,5 +117,9 @@ int main(int argc, const char * argv[]) {
     cout << "temps moyen par sequence: " << tempsmoyen/10000 << endl;
     //sequence.close_fichier();
     //offsets.close_fichier();
+    map<double,int>::iterator itr;
+    for(itr = score_max.begin(); itr != score_max.end(); ++itr){
+        cout<<"score : "<<itr->first<<" g : "<<itr->second<<endl;
+    }
     return 0;
 }

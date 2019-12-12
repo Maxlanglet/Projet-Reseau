@@ -110,35 +110,58 @@ int Swipe::findMax(int array[], int longueur){
 
 
 //TODO: Pas finis mais deja un debut
-void Swipe::Algo(const string &fasta, const char* &psq, long offset1, long offset2){
+double Swipe::Algo(const string &fasta, const char* &psq, long offset1, long offset2){
+    //cout<<"lancement algo ok"<<endl;
     int posi=0;
     int posj=0;
     int max=0;
     unsigned long ligne = fasta.size();
-    unsigned long colonne = offset2-offset1;
-    //int mat[ligne+1][colonne+1];
+    int colonne = offset2-offset1;
+    
+    //variable pour la fct poids Wk = u*k+v
+    int u = 1;
+    int v = 11;
+    
     vector<vector<int> > mat(ligne+1, vector<int>(colonne+1, 0));
+    
+    //matrice pour mémoiser les éléments Pij
+    vector<vector<int> > p(ligne+1, vector<int>(colonne+1));
+    try{
+        for(int i = 0;i<=ligne;i++){
+            p.at(i).at(0) = -9999;
+        }
+        for(int j= 0; j <= colonne; j++){
+            p.at(0).at(j) = -9999;
+            p.at(1).at(j) = -u;
+        }
+    }
+    catch(const std::out_of_range& oor){
+        cout<<"out of range pour creation p"<<endl;
+    }
+    
     //for(int i=0;i<=ligne;i++){
-        //mat[i][0]=0;
+    //mat[i][0]=0;
     //}
     //for(int j=0;j<=colonne;j++){
-        //mat[0][j]=0;
+    //mat[0][j]=0;
     //}
     //mat.clear();
     //mat.resize(fasta.size(), vector<int>(offset2-offset1));
     //vector<vector<int> > mat(fasta.size(), vector<int>(offset2-offset1, 0));//TODO: meilleur choix avec matrice et memoisation de je sais pas quoi, comme pas possible de faire int [truc variable] il faut passer par des pointeurs je pense
     /*
-    int **mat;
-    mat = (int **) malloc(fasta.size() * sizeof(int*));
-    for(int row = 0; row<fasta.size(); row++) {
-       mat[row] = (int *) malloc((offset2-offset1) * sizeof(int));
-    }
-    for (int i = 0; i<fasta.size(); i++) {
-        for (int j =0; j<offset2-offset1; j++) {
-            mat[i][j]=0;
-        }
-    }
+     int **mat;
+     mat = (int **) malloc(fasta.size() * sizeof(int*));
+     for(int row = 0; row<fasta.size(); row++) {
+     mat[row] = (int *) malloc((offset2-offset1) * sizeof(int));
+     }
+     for (int i = 0; i<fasta.size(); i++) {
+     for (int j =0; j<offset2-offset1; j++) {
+     mat[i][j]=0;
+     }
+     }
      */
+    
+    //vector<int> q;
     
     int memo[4];
     //cout << "pas pbm memo" << endl;
@@ -146,35 +169,65 @@ void Swipe::Algo(const string &fasta, const char* &psq, long offset1, long offse
         posi=get_pos(fasta[i-1]);
         //cout << "pas pbm fasta" << endl;
         //cout << posi << endl;
+        
+         vector<int> q(colonne+1, 0);
+        q[0]=-9999;
+        
         for (int j =1; j<=offset2-offset1; j++) {
             //ligne.clear();
             posj=get_pos(score_Inverse(psq[j+offset1]));
             //cout << "pas pbm psq" << endl;
             //cout << posj << endl;
-            memo[0]=mat[i-1][j-1]+blosum(posi, posj);
+            memo[0]=mat.at(i-1).at(j-1)+blosum(posi, posj);
             //cout << "pas pbm memo0 ou blosum" << endl;
-            memo[1]=mat[i-1][j]-11;
+            // memo[1]=mat[i-1][j]-11;
+            memo[1]=p.at(i).at(j);
             //cout << "pas pbm memo1" << endl;
-            memo[2]=mat[i][j-1]-11;
-            //cout << "pas pbm memo2" << endl;
+            try{
+                
+                // memo[2]=mat[i][j-1]-11;
+                memo[2]=q.at(j);
+                //cout << "pas pbm memo2" << endl;
+            }
+            catch(const std::out_of_range& oor){
+                cout<<"out of range pour memo pour j = "<<j<<endl;
+            }
             memo[3]=0;
             //cout << "pas pbm memo3" << endl;
             mat[i][j] = findMax(memo, 4);
             //cout << "pas pbm findmax" << endl;
-            if (mat[i][j]>max) {
+            if (mat.at(i).at(j)>max) {
                 max = mat[i][j];
                 //cout << "pas pbm max" << endl;
             }
+            try{
+                int comp[2];
+                comp[0]=mat[i][j]-u;
+                comp[1]=q[j];
+                if(j < offset2-offset1){
+                    q[j+1]=findMax(comp,2);
+                }
+                comp[1]=p[i][j]-u;
+                if(i != fasta.size()){
+                    p[i+1][j] = findMax(comp, 2);
+                }
+            }
+            catch(const std::out_of_range& oor){
+                cout<<"out of range pour i+1 et j+1"<<endl;
+            }
+            
+            
         }
     }
     double lambda = 0.267;
     double Sbit = (max*lambda-3.34)/log(2);
     cout << "score :"<< Sbit << endl;
+    return Sbit;
     /*
-    for(int row = 0; row<fasta.size(); row++) {
-        free(mat[row]);
-    }
-    free(mat);
+     for(int row = 0; row<fasta.size(); row++) {
+     free(mat[row]);
+     }
+     free(mat);
      */
 }
 //void swipe::lireBlosum(const char blosum)//si on a le choix pour les matrices BLOSUM alors on fait direct une map
