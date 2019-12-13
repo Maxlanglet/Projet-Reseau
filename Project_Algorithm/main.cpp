@@ -89,7 +89,7 @@ int main(int argc, const char * argv[]) {
     double tempsmoyen = 0.0;
     chrono::time_point<chrono::system_clock> start, end;
     start = std::chrono::system_clock::now();
-    for (int g = 1; g<10000; g++) {//1878 pbm //offsets.get_size()
+    for (int g = 116900; g<126000; g++) {//1878 pbm //offsets.get_size()
         long h = offsets.get_seq_offset(g-1);
         long u = offsets.get_seq_offset(g);
         chrono::time_point<chrono::system_clock> start2, end2;
@@ -106,9 +106,12 @@ int main(int argc, const char * argv[]) {
         
         end2 = std::chrono::system_clock::now();
         double elapsed_seconds2 = chrono::duration_cast<chrono::milliseconds>(end2-start2).count();
-        cout << "elapsed time: " << elapsed_seconds2 << "ms\n";
+        //cout << "elapsed time: " << elapsed_seconds2 << "ms\n";
         tempsmoyen += elapsed_seconds2;
-        cout << g << endl;
+        if(g%100 == 0 ){
+            cout<<g-1<<endl;
+        }
+        //cout << g-1 << endl;
     }
     //sequence.del();
     end = std::chrono::system_clock::now();
@@ -119,7 +122,7 @@ int main(int argc, const char * argv[]) {
     //offsets.close_fichier();
     map<double,int>::iterator itr;
     for(itr = score_max.begin(); itr != score_max.end(); ++itr){
-        cout<<"score : "<<itr->first<<" g : "<<itr->second<<endl;
+        cout<<"score : "<<itr->first<<" g : "<<itr->second - 1<<endl;
     }
     return 0;
 }

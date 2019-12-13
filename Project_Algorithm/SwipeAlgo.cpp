@@ -120,24 +120,40 @@ double Swipe::Algo(const string &fasta, const char* &psq, long offset1, long off
     
     //variable pour la fct poids Wk = u*k+v
     int u = 1;
-    int v = 11;
+    int v = 10;
     
-    vector<vector<int> > mat(ligne+1, vector<int>(colonne+1, 0));
+    //vector<vector<int> > mat(ligne+1, vector<int>(colonne+1,0));
+    
+    int **mat;
+    mat = (int **) malloc((ligne+1) * sizeof(int*));
+    for(int row = 0; row<ligne+1; row++) {
+        mat[row] = (int *) malloc((colonne+1) * sizeof(int));
+    }
+    for (int i = 0; i<ligne+1; i++) {
+        mat[i][0]=0;
+    }
+    for (int j =0; j<colonne+1; j++) {
+        mat[0][j]=0;
+    }
     
     //matrice pour mémoiser les éléments Pij
-    vector<vector<int> > p(ligne+1, vector<int>(colonne+1));
+    /*vector<vector<int> > p(ligne+1, vector<int>(colonne+1));
     try{
         for(int i = 0;i<=ligne;i++){
-            p.at(i).at(0) = -9999;
+            p[i][0] = -9999;
         }
         for(int j= 0; j <= colonne; j++){
-            p.at(0).at(j) = -9999;
-            p.at(1).at(j) = -u;
+            p[0][j] = -9999;
+            p[1][j] = -u-v;
         }
     }
     catch(const std::out_of_range& oor){
         cout<<"out of range pour creation p"<<endl;
-    }
+    }*/
+    
+    vector<int> p(colonne+1);
+    p[0] = -9999;
+    p[1] = -u-v;
     
     //for(int i=0;i<=ligne;i++){
     //mat[i][0]=0;
@@ -170,23 +186,26 @@ double Swipe::Algo(const string &fasta, const char* &psq, long offset1, long off
         //cout << "pas pbm fasta" << endl;
         //cout << posi << endl;
         
-         vector<int> q(colonne+1, 0);
-        q[0]=-9999;
+         //vector<int> q(colonne+1, 0);
+        //q[0]=-9999;
+        int q = -u-v;
         
         for (int j =1; j<=offset2-offset1; j++) {
             //ligne.clear();
             posj=get_pos(score_Inverse(psq[j+offset1]));
             //cout << "pas pbm psq" << endl;
             //cout << posj << endl;
-            memo[0]=mat.at(i-1).at(j-1)+blosum(posi, posj);
+            memo[0]=mat[i-1][j-1]+blosum(posi, posj);
             //cout << "pas pbm memo0 ou blosum" << endl;
             // memo[1]=mat[i-1][j]-11;
-            memo[1]=p.at(i).at(j);
+            //memo[1]=p[i][j];
+            memo[1] = p[j];
             //cout << "pas pbm memo1" << endl;
             try{
                 
                 // memo[2]=mat[i][j-1]-11;
-                memo[2]=q.at(j);
+                //memo[2]=q[j];
+                memo[2]=q;
                 //cout << "pas pbm memo2" << endl;
             }
             catch(const std::out_of_range& oor){
@@ -196,20 +215,24 @@ double Swipe::Algo(const string &fasta, const char* &psq, long offset1, long off
             //cout << "pas pbm memo3" << endl;
             mat[i][j] = findMax(memo, 4);
             //cout << "pas pbm findmax" << endl;
-            if (mat.at(i).at(j)>max) {
+            if (mat[i][j]>max) {
                 max = mat[i][j];
                 //cout << "pas pbm max" << endl;
             }
             try{
                 int comp[2];
-                comp[0]=mat[i][j]-u;
-                comp[1]=q[j];
+                comp[0]=mat[i][j]-u-v;
+                //comp[1]=q[j];
+                comp[1]=q-u;
                 if(j < offset2-offset1){
-                    q[j+1]=findMax(comp,2);
+                    //q[j+1]=findMax(comp,2);
+                    q=findMax(comp,2);
                 }
-                comp[1]=p[i][j]-u;
+                //comp[1]=p[i][j]-u;
+                comp[1]=p[j]-u;
                 if(i != fasta.size()){
-                    p[i+1][j] = findMax(comp, 2);
+                    //p[i+1][j] = findMax(comp, 2);
+                    p[j] = findMax(comp, 2);
                 }
             }
             catch(const std::out_of_range& oor){
@@ -221,7 +244,13 @@ double Swipe::Algo(const string &fasta, const char* &psq, long offset1, long off
     }
     double lambda = 0.267;
     double Sbit = (max*lambda-3.34)/log(2);
-    cout << "score :"<< Sbit << endl;
+    //cout << "score :"<< Sbit << endl;
+    
+    for(int row = 0; row<ligne+1; row++){
+        free(mat[row]);
+    }
+    free(mat);
+    
     return Sbit;
     /*
      for(int row = 0; row<fasta.size(); row++) {
