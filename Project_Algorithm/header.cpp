@@ -69,7 +69,7 @@ int Header::read_int(){
 }
 
 void Header::acquiert(int offset){
-	open_fichier();
+	//open_fichier();
 	f.seekg(offset);
 	//int pos = f.tellg();
 	int var = 0;

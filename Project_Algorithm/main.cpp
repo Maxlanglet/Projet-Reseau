@@ -74,6 +74,7 @@ int main(int argc, const char * argv[]) {
     //"/Users/langletmaxime/Desktop/P4/C++/swipe/uniprot_sprot.fasta.pin"
     Sequence sequence("uniprot_sprot.fasta.psq");
     Offsets offsets("uniprot_sprot.fasta.pin");
+    Header head("uniprot_sprot.fasta.phr");
     Swipe swipe;
     ifstream input("P00533.fasta");
     string fasta = Fasta_To_String(input);
@@ -89,7 +90,7 @@ int main(int argc, const char * argv[]) {
     double tempsmoyen = 0.0;
     chrono::time_point<chrono::system_clock> start, end;
     start = std::chrono::system_clock::now();
-    for (int g = 116900; g<126000; g++) {//1878 pbm //offsets.get_size()
+    for (int g = 116900; g<121000; g++) {//1878 pbm //offsets.get_size()
         long h = offsets.get_seq_offset(g-1);
         long u = offsets.get_seq_offset(g);
         chrono::time_point<chrono::system_clock> start2, end2;
@@ -117,12 +118,24 @@ int main(int argc, const char * argv[]) {
     end = std::chrono::system_clock::now();
     double elapsed_seconds = chrono::duration_cast<chrono::seconds>(end-start).count();
     cout << "elapsed time: " << elapsed_seconds << "s\n";
-    cout << "temps moyen par sequence: " << tempsmoyen/10000 << endl;
+    cout << "temps moyen par sequence: " << tempsmoyen/5000 << endl;
     //sequence.close_fichier();
     //offsets.close_fichier();
     map<double,int>::iterator itr;
+    long max = score_max.begin()->second;
+    max = max - 1;
+    cout<<"val du max : "<<max<<endl;
+    head.open_fichier();
+    head.test_fichier();
+    /*head.close_fichier();
+    head.acquiert((int)max);
+    head.getData();
+    head.close_fichier();*/
     for(itr = score_max.begin(); itr != score_max.end(); ++itr){
         cout<<"score : "<<itr->first<<" g : "<<itr->second - 1<<endl;
+        head.acquiert(itr->second - 1);
     }
+    head.close_fichier();
+    
     return 0;
 }

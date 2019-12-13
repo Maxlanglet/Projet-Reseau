@@ -1,37 +1,37 @@
 all: main clean
 
 main: main.o Fasta_To_Bits.o Score.o ouverture.o comparaison.o binaire.o Sequence.o Offsets.o blosum.o SwipeAlgo.o header.o
-	g++ main.o Fasta_To_Bits.o Score.o ouverture.o comparaison.o binaire.o Sequence.o Offsets.o blosum.o SwipeAlgo.o header.o -o main
+	g++ -O3 -Ofast -std=c++11 main.o Fasta_To_Bits.o Score.o ouverture.o comparaison.o binaire.o Sequence.o Offsets.o blosum.o SwipeAlgo.o header.o -o main
 
 Fasta_To_Bits.o: Fasta_To_Bits.cpp Fasta_To_Bits.hpp
-	g++ -c -O3 Fasta_To_Bits.cpp
+	g++ -O3 -Ofast -std=c++11 -c Fasta_To_Bits.cpp 
 
 Score.o: Score.cpp Score.hpp
-	g++ -c -O3 Score.cpp
+	g++ -O3 -Ofast -std=c++11 -c Score.cpp
 
 ouverture.o: ouverture.cpp ouverture.hpp
-	g++ -c -O3 ouverture.cpp
+	g++ -O3 -Ofast -std=c++11 -c ouverture.cpp
 
 comparaison.o: comparaison.cpp comparaison.hpp
-	g++ -c -O3 comparaison.cpp
+	g++ -O3 -Ofast -std=c++11 -c comparaison.cpp
 
 binaire.o: binaire.cpp binaire.h
-	g++ -c -O3 binaire.cpp
+	g++ -O3 -Ofast -std=c++11 -c binaire.cpp
 
 Sequence.o: Sequence.cpp Sequence.hpp
-	g++ -c -O3 Sequence.cpp
+	g++ -O3 -Ofast -std=c++11 -c Sequence.cpp
 	
 Offsets.o: Offsets.cpp Offsets.hpp
-	g++ -c -O3 Offsets.cpp
+	g++ -O3 -Ofast -std=c++11 -c Offsets.cpp
 	
 blosum.o: blosum.cpp blosum.hpp
-	g++ -c -O3 blosum.cpp
+	g++ -O3 -Ofast -std=c++11 -c blosum.cpp
 	
 SwipeAlgo.o: SwipeAlgo.cpp SwipeAlgo.hpp
-	g++ -c -O3 SwipeAlgo.cpp
+	g++ -O3 -Ofast -std=c++11 -c SwipeAlgo.cpp
 	
 header.o: header.cpp header.h
-	g++ -c -O3 header.cpp
+	g++ -O3 -Ofast -std=c++11 -c header.cpp
 
 clean:
 	rm -f *.o
