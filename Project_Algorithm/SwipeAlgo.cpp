@@ -109,7 +109,7 @@ int Swipe::findMax(int array[], int longueur){
 }
 
 
-//TODO: Pas finis mais deja un debut
+//TODO: Presque finis
 double Swipe::Algo(const string &fasta, const char* &psq, long offset1, long offset2){
     //cout<<"lancement algo ok"<<endl;
     int posi=0;
