@@ -58,7 +58,7 @@ int main(int argc, const char * argv[]) {
         start2 = std::chrono::system_clock::now();
         
         score = swipe.Algo(fasta, seq, h, u);
-        if(score_max.size() < 20){
+        if(score_max.size() < 21){
             score_max.insert(pair<double, int>(score,g));
         }
         else if(score_max.size() == 20 && score_max.begin()->first < score){
@@ -81,18 +81,18 @@ int main(int argc, const char * argv[]) {
     
     
     map<double,int>::iterator itr;
-    int max = score_max.end()->second;
-    max = max - 1;
-    cout<<"val du max : "<<max<<endl;//ici le probleme de header
+    int off=0;
     head.open_fichier();
     //head.test_fichier();
     /*head.close_fichier();
     head.acquiert((int)max);
     head.getData();
     head.close_fichier();*/
-    for(itr = score_max.begin(); itr != score_max.end(); ++itr){
+    for(itr = --score_max.end(); itr != score_max.begin(); itr--){
         cout<<"score : "<<itr->first<<" g : "<<itr->second - 1<<endl;
-        head.acquiert(itr->second - 1);
+        off = offsets.get_head_offset((int)((itr)->second - 1));
+        head.acquiert(off);
+        head.getData();
     }
     head.close_fichier();
     
