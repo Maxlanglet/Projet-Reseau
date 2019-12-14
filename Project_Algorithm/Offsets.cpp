@@ -79,7 +79,9 @@ void Offsets::header_offset(){
 }
 
 
-
+int Offsets::get_head_offset(int pos){
+    return head_offsets[pos];
+}
 
 int Offsets::get_seq_offset(int pos){
     return seq_offsets[pos];
