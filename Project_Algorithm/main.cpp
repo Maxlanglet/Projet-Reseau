@@ -90,9 +90,7 @@ int main(int argc, const char * argv[]) {
     head.close_fichier();*/
     for(itr = --score_max.end(); itr != score_max.begin(); itr--){
         cout<<"score : "<<itr->first<<" g : "<<itr->second - 1<<endl;
-        off = offsets.get_head_offset((int)((itr)->second - 1));
-        head.acquiert(off);
-        head.getData();
+        head.acquiert(itr->second - 1);
     }
     head.close_fichier();
     
