@@ -31,11 +31,11 @@ int main(int argc, const char * argv[]) {
      */
     //"/Users/langletmaxime/Desktop/P4/C++/swipe/uniprot_sprot.fasta.psq"
     //"/Users/langletmaxime/Desktop/P4/C++/swipe/uniprot_sprot.fasta.pin"
-    Sequence sequence("/Users/langletmaxime/Desktop/P4/C++/swipe/uniprot_sprot.fasta.psq");
-    Offsets offsets("/Users/langletmaxime/Desktop/P4/C++/swipe/uniprot_sprot.fasta.pin");
-    Header head("/Users/langletmaxime/Desktop/P4/C++/swipe/uniprot_sprot.fasta.phr");
+    Sequence sequence("uniprot_sprot.fasta.psq");
+    Offsets offsets("uniprot_sprot.fasta.pin");
+    Header head("uniprot_sprot.fasta.phr");
     Swipe swipe;
-    ifstream input("/Users/langletmaxime/Desktop/P4/C++/swipe/P00533.fasta");
+    ifstream input("P00533.fasta");
     
     string fasta = Fasta_To_String(input);
     sequence.read_psq();
@@ -58,7 +58,7 @@ int main(int argc, const char * argv[]) {
         start2 = std::chrono::system_clock::now();
         
         score = swipe.Algo(fasta, seq, h, u);
-        if(score_max.size() < 21){
+        if(score_max.size() < 20){
             score_max.insert(pair<double, int>(score,g));
         }
         else if(score_max.size() == 20 && score_max.begin()->first < score){
@@ -83,16 +83,23 @@ int main(int argc, const char * argv[]) {
     map<double,int>::iterator itr;
     int off=0;
     head.open_fichier();
+    ofstream result("resultat.txt");
     //head.test_fichier();
     /*head.close_fichier();
     head.acquiert((int)max);
     head.getData();
     head.close_fichier();*/
-    for(itr = --score_max.end(); itr != score_max.begin(); itr--){
+    for(itr = score_max.begin(); itr != score_max.end(); ++itr){
         cout<<"score : "<<itr->first<<" g : "<<itr->second - 1<<endl;
-        head.acquiert(itr->second - 1);
+        off = offsets.get_head_offset((int)((itr)->second - 1));
+        head.acquiert(off);
+        head.getData(&result);
+        result<<itr->first<<endl;
+        //result << "score : "<<itr->first<<" g : "<<itr->second - 1<<endl;
+        
     }
     head.close_fichier();
+    result.close();
     
     return 0;
 }

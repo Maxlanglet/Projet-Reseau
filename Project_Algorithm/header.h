@@ -17,7 +17,7 @@ private:
 public :
 	Header(string adr);
 	void acquiert(int offset);
-	void getData();
+	void getData(ofstream* res);
 	
 	
 	

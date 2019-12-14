@@ -100,11 +100,12 @@ void Header::acquiert(int offset){
 	}
 }
 
-void Header::getData(){
+void Header::getData(ofstream* res){
 	cout<<"nom proteine : "<<nom<<endl;
 	cout<<"nom base de donnée : "<<base<<endl;
 	cout<<"numero : "<<quantieme<<endl;
 	cout<<"taxid : "<<taxid<<endl;
+    *res <<base<<" | "<<quantieme<<" | "<<nom<<" | "<<taxid<<" | score : ";
 }
 
 int Header::Hex_Int(string hex, int size){
