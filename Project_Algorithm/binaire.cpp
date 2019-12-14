@@ -12,7 +12,6 @@ Binaire::Binaire(string adr)
 string getAdresse();
 
 void Binaire::open_fichier(){
-	cout << adresse<< endl;
 	f.open(adresse, ios::in | ios::binary);
 	//f(adresse, ios::in | ios::binary);
 	
@@ -20,8 +19,6 @@ void Binaire::open_fichier(){
 		cout << "erreur, impossible d'ouvrir le fichier" << endl;
 		//return null;
 	}
-
-	//return f;
 }
 
 void Binaire::test_fichier(){
@@ -32,7 +29,7 @@ void Binaire::test_fichier(){
 	else{
 		char octet;
 		f.read(&octet,1);
-		cout << (int)octet << endl;
+		//cout << (int)octet << endl;
 	}
 }
 

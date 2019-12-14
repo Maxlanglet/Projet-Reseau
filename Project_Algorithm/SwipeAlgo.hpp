@@ -16,7 +16,7 @@ public:
     int get_pos(char prot);
     int get_blosum(int i, int j);
     Swipe();
-    double Algo(const string &fasta, const char* &psq, long offset1, long offset2);
+    double Algo(const string &fasta, const char* &psq, int offset1, int offset2);
     int findMax(int array[], int longueur);
 private:
     //peut etre mettre matrice et resize a chaque fois dans l'algo

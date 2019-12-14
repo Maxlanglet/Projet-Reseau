@@ -28,8 +28,7 @@
 
 using namespace std;
 
-string Score(string sequence);
+//string Score(string sequence);
 char score_Inverse(int valeur);
-int comparaison_De_Sequence(ifstream &file, string sequence);
 
 #endif /* Score_hpp */

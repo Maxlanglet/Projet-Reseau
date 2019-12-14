@@ -18,6 +18,10 @@ void Offsets::offset(){
     ifstream f(adresse);
     //header offset
     cout << "lecture pin head" << endl;
+    if (!f.is_open()){
+        cout << " erreur ouverture fichier" << endl;
+        //break;
+    }
     head_offsets.clear();
     //vector<int> v2;
     //f.seekg(1,ios::beg); probleme ici mais du coup je sais pas comment faire pour lire au debut
@@ -46,8 +50,12 @@ void Offsets::offset(){
     
     
     //sequence offset
-    cout << "lecture pin" << endl;
+    cout << "lecture pin off" << endl;
     seq_offsets.clear();
+    if (!f.is_open()){
+        cout << " erreur ouverture fichier" << endl;
+        //break;
+    }
     int i = 0;
     int myint;
     while (!f.eof()) {
