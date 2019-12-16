@@ -7,63 +7,94 @@
 #include "binaire.h"
 #include "Sequence.hpp"
 #include "Offsets.hpp"
-#include "blosum.hpp"
 #include "header.h"
 #include <map>
 #include <iterator>
 
 
 int main(int argc, const char * argv[]) {
-    /*
-    if(argc<=1){
-        cout << "Argument demandé :" << argv[0]<<" [fichier] "<<endl;
+    if(argc<3){
+        cout << "Argument demandé :" << argv[0]<<" [fichier unisprot] [fichier fasta] optionnel: [fichier matrice blosum] [Gap open penality] [Gap penality extension]  "<<endl;
         return 1;
     }
-    
 
+    string chemin_unisprot1 = argv[1];
+    chemin_unisprot1.append(".psq");
+    cout << chemin_unisprot1 << endl;
+    string chemin_unisprot3 = argv[1];
+    chemin_unisprot3.append(".phr");
+    cout << chemin_unisprot3 << endl;
+    string chemin_unisprot2 = argv[1];
+    chemin_unisprot2.append(".pin");
+    cout << chemin_unisprot2 << endl;
     
-    //ifstream input(argv[1]);
-    string bits;
-    //ifstream input(argv[1]);
-    //ifstream input2(argv[2]);
-    //ifstream file(argv[3]);
-    //ifstream file2(argv[4]);
-     */
-    //"/Users/langletmaxime/Desktop/P4/C++/swipe/uniprot_sprot.fasta.psq"
-    //"/Users/langletmaxime/Desktop/P4/C++/swipe/uniprot_sprot.fasta.pin"
-    Sequence sequence("uniprot_sprot.fasta.psq");
-    Offsets offsets("uniprot_sprot.fasta.pin");
-    Header head("uniprot_sprot.fasta.phr");
+    Sequence sequence(chemin_unisprot1);
+    Offsets offsets(chemin_unisprot2);
+    Header head(chemin_unisprot3);
+    
+    string chemin_fasta = argv[2];
+    ifstream input(chemin_fasta);
+    
     Swipe swipe;
-    ifstream input("P00533.fasta");
     
     string fasta = Fasta_To_String(input);
     sequence.read_psq();
     offsets.offset();
+    if (argc>=4) {
+        swipe.initialise_blosum(argv[3]);
+    }
+    else{
+        swipe.initialise_blosum();
+    }
+    
+    int gap_penality = 0;
+    int extension_penality = 0;
+    
+    if (argc>=6) {
+        gap_penality = atoi(argv[4]);
+        extension_penality = atoi(argv[5]);
+    }
+    else{
+        gap_penality = 11;
+        extension_penality = 1;
+    }
     
     
     map<double, int> score_max;
-    double score = 0;
+    int score = 0;
     const char* seq = sequence.get_sequence2();
     
-    
-    cout << "lancement swipe" << endl;
+    cout << endl;
+    cout << "[+] Lancement swipe" << endl;
     double tempsmoyen = 0.0;
     chrono::time_point<chrono::system_clock> start, end;
     start = std::chrono::system_clock::now();
-    for (int g = 116000; g<123000; g++) {//1878 pbm //offsets.get_size()
+    int init= 116000;
+    int fin = 124000;
+    //int size = offsets.get_size();
+    for (int g = init; g<fin; g++) {//offsets.get_size()//119500
         int h = offsets.get_seq_offset(g-1);
         int u = offsets.get_seq_offset(g);
         chrono::time_point<chrono::system_clock> start2, end2;
         start2 = std::chrono::system_clock::now();
         
-        score = swipe.Algo(fasta, seq, h, u);
+        //int f = offsets.get_seq_offset(3500+g);
+        //int d = offsets.get_seq_offset(3500+g-1);
+        //future<int> fut = async(launch::async, &Swipe::Algo, &swipe.Algo, fasta, seq, h, u);
+        //future<int> fut = async(launch::async, [&]{ return swipe.Algo(fasta, seq, h, u);});
+        //future<int> fut2 = async(launch::async, [&]{ return swipe.Algo(fasta, seq, f, d);});
+        score = swipe.Algo(fasta, seq, h, u, gap_penality, extension_penality);
+        //int score = fut.get();
+        //int score2 = fut2.get();
+        
+        
         if(score_max.size() < 20){
             score_max.insert(pair<double, int>(score,g));
+            //score_max.insert(pair<double, int>(score2,3500+g));
         }
         else if(score_max.size() == 20 && score_max.begin()->first < score){
             score_max.erase(score_max.begin());
-            score_max.insert(pair<double, int>(score,g));
+            //score_max.insert(pair<double, int>(score,g));
         }
         
         end2 = std::chrono::system_clock::now();
@@ -76,30 +107,38 @@ int main(int argc, const char * argv[]) {
     }
     end = std::chrono::system_clock::now();
     double elapsed_seconds = chrono::duration_cast<chrono::seconds>(end-start).count();
-    cout << "elapsed time: " << elapsed_seconds << "s\n";
-    cout << "temps moyen par sequence: " << tempsmoyen/7000 << "ms" << endl;
+    cout << "Elapsed time: " << elapsed_seconds << "s\n";
+    cout << "Average time per sequence: " << tempsmoyen/(fin-init) << "ms" << endl;
     
     
     map<double,int>::iterator itr;
     int off=0;
     head.open_fichier();
+    
+    auto timenow =chrono::system_clock::to_time_t(chrono::system_clock::now());
     ofstream result("resultat.txt");
-    //head.test_fichier();
-    /*head.close_fichier();
-    head.acquiert((int)max);
-    head.getData();
-    head.close_fichier();*/
+    result << "Smith-Waterman Algorithm " << ctime(&timenow) << endl;
+    result << endl;
+
+    result << "Elapsed time: " << elapsed_seconds << "s" << endl;
+    result << "Average time per sequence: " << tempsmoyen/(fin-init) << "s" << endl; //TODO: a changer ici
+    result << endl;
+    
+    result << "Sequence producing significant alignements :" << endl;
+    result <<endl;
+    
     for(itr = score_max.begin(); itr != score_max.end(); ++itr){
-        cout<<"score : "<<itr->first<<" g : "<<itr->second - 1<<endl;
         off = offsets.get_head_offset((int)((itr)->second - 1));
         head.acquiert(off);
         head.getData(&result);
-        result<<itr->first<<endl;
-        //result << "score : "<<itr->first<<" g : "<<itr->second - 1<<endl;
+        result<< setw(20) << itr->first<<endl;
         
     }
+    swipe.free_blosum();
+    sequence.del();
     head.close_fichier();
     result.close();
-    
+    cout << endl;
+    cout << "[+] Fichier resultat.txt créé dans le dossier dans lequel vous etes" << endl; //TODO: changer 
     return 0;
 }

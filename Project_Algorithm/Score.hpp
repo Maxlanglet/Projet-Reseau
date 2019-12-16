@@ -19,12 +19,16 @@
 #include <cstring>
 #include <sstream>
 #include <cstdio>
+#include <cstdlib>
 #include <string.h>
 #include <arpa/inet.h>
 #include <vector>
 #include <chrono>
 #include <ctime>
 #include <map>
+#include <future>
+#include <regex>
+#include <sstream>
 
 using namespace std;
 

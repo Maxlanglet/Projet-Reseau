@@ -101,11 +101,16 @@ void Header::acquiert(int offset){
 }
 
 void Header::getData(ofstream* res){
+    //cout << left << base<<"|"<<quantieme<< setw(2) << nom << endl;
+    //*res << left << "Sequence with significant alignements" << setw(20) << "Score(bits)" << endl;
+    /*
 	cout<<"nom proteine : "<<nom<<endl;
 	cout<<"nom base de donnée : "<<base<<endl;
 	cout<<"numero : "<<quantieme<<endl;
 	cout<<"taxid : "<<taxid<<endl;
-    *res <<base<<" | "<<quantieme<<" | "<<nom<<" | "<<taxid<<" | score : ";
+     */
+    *res << left << base<<" | "<<quantieme<<" | "<<nom<<" | "<<taxid << setw(20) << " | score : ";
+    
 }
 
 int Header::Hex_Int(string hex, int size){

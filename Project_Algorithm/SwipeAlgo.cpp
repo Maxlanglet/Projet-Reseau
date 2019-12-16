@@ -9,12 +9,11 @@
 #include "SwipeAlgo.hpp"
 
 Swipe::Swipe(){// :  mat()
+    //score;
+    //blosum1;
 }
-
-
-int Swipe::get_blosum(int i, int j){
-    return blosum(i,j);//TODO: absolument faire ca
-}
+//https://www.researchgate.net/publication/281431935_Comparative_Study_of_the_Parallelization_of_the_Smith-Waterman_Algorithm_on_OpenMP_and_Cuda_C
+//openMP
 
 int Swipe::get_pos(char prot){
     int pos=0;
@@ -103,19 +102,83 @@ int Swipe::get_pos(char prot){
 
 int Swipe::findMax(int array[], int longueur){
     int max = array[0];
-    //int ind = 0;
     for(int i=1; i<longueur; i++){
         if(array[i] > max){
             max = array[i];
-            //ind=i;
         }
     }
     return max;
 }
 
+void Swipe::initialise_blosum(string adresse){
+    ifstream file(adresse);
+    if(!file.is_open()) {
+        cout << "[-] Pas bon chemin pour matrice blosum" << endl;
+    }
+    
+    blosum1=(int **) malloc((25) * sizeof(int*));
+    for(int row = 0; row<25; row++) {
+        blosum1[row] = (int *) malloc((25) * sizeof(int));
+    }
+    int k=0;
+    int l=0;
+    string word, t, q, filename;
+    static const std::regex intRegex{ "[-+]?([0-9]*\.[0-9]+|[0-9]+)"};
+    while (file >> word){
+        if (regex_match(word, intRegex)){
+            istringstream inputStream(word);
+            int i;
+            inputStream >> i;
+            blosum1[k][l]=i;
+            l++;
+            if (l==25) {
+                l=0;
+                k++;
+            }
+        }
+        else if(regex_match(word.substr(0, word.size()-3), intRegex)){
+            word = word.substr(0, word.size()-3);
+            istringstream inputStream(word);
+            int i;
+            inputStream >> i;
+            blosum1[k][l]=i;
+            l++;
+            if (l==25) {
+                l=0;
+                k++;
+            }
+        }
+        else if(regex_match(word.substr(0, word.size()-2), intRegex)){
+            word = word.substr(0, word.size()-2);
+            istringstream inputStream(word);
+            int i;
+            inputStream >> i;
+            blosum1[k][l]=i;
+            l++;
+            if (l==25) {
+                l=0;
+                k++;
+            }
+        }
+    
+    }
+    file.close();
+}
+
+int Swipe::blosum(int i, int j){
+    return blosum1[i][j];
+}
+
+
+void Swipe::free_blosum(){
+    for(int row = 0; row<25; row++){
+        free(blosum1[row]);
+    }
+    free(blosum1);
+}
 
 //TODO: Presque finis
-double Swipe::Algo(const string &fasta, const char* &psq, int offset1, int offset2){
+int Swipe::Algo(const string &fasta, const char* &psq, int offset1, int offset2, int gap_penality, int extension_penality){
     int posi=0;
     int posj=0;
     int max=0;
@@ -123,8 +186,8 @@ double Swipe::Algo(const string &fasta, const char* &psq, int offset1, int offse
     int colonne = offset2-offset1;
     
     //variable pour la fct poids Wk = u*k+v
-    int u = 1;
-    int v = 10;
+    int u = extension_penality;
+    int v = gap_penality;
     
     //vector<vector<int> > mat(ligne+1, vector<int>(colonne+1,0));
     
@@ -168,7 +231,7 @@ double Swipe::Algo(const string &fasta, const char* &psq, int offset1, int offse
             }
              */
             int pj = p[j];
-            memo[0]=mat[i-1][j-1]+blosum(posi, posj);
+            memo[0]=mat[i-1][j-1]+blosum(posi,posj);
             memo[1] = pj;
             memo[2]=q;
             memo[3]=0;
@@ -206,6 +269,7 @@ double Swipe::Algo(const string &fasta, const char* &psq, int offset1, int offse
     }
     double lambda = 0.267;
     int Sbit = (max*lambda-3.34)/log(2);
+    //score = (max*lambda-3.34)/log(2);
     
     for(int row = 0; row<ligne+1; row++){
         free(mat[row]);
@@ -216,4 +280,3 @@ double Swipe::Algo(const string &fasta, const char* &psq, int offset1, int offse
     
     return Sbit;
 }
-//void swipe::lireBlosum(const char blosum)//si on a le choix pour les matrices BLOSUM alors on fait direct une map

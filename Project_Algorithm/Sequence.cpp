@@ -55,7 +55,7 @@ void Sequence::read_psq(){
     long begin_byte, end_byte;
     ifstream f(adresse);
     if (!f.is_open()){
-        cout << " erreur ouverture fichier" << endl;
+        cout << "[-] Erreur ouverture fichier psq" << endl;
         //break;
     }
     else{
@@ -66,13 +66,13 @@ void Sequence::read_psq(){
         f.seekg(0, ios::beg);
         sequence = new char[total_bytes+1];
         int index=0;
-        cout << "lecture psq" << endl;
+        cout << "[+] Lecture psq" << endl;
          //char buf;
         while (f) {
              //f.read(reinterpret_cast<char*>(&buf), sizeof(char));//embiguité soit buf doit etre un int ou un char je sais pas
              sequence[index++]=f.get();
         }
-         cout << "finis psq" <<  endl;
+         cout << "[+] Finis psq" <<  endl;
          f.close();
     }
 }
@@ -81,14 +81,14 @@ void Sequence::read_psq(){
 void Sequence::del(){
     delete [] sequence;
 }
-
+/*
 void Sequence::get_sequence(int k, int l){
     for (int j = k; j <l-1; j++) {
         cout << score_Inverse(sequence[j]);
     }
     cout << endl;
 }
-
+*/
  
 char* Sequence::get_sequence2(){
     return sequence;

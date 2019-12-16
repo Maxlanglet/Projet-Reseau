@@ -15,7 +15,7 @@ class Sequence : public Binaire{
 public:
     void read_psq();
     Sequence(string adr);
-    void get_sequence(int k = 0, int l = 100);
+    //void get_sequence(int k = 0, int l = 100);
     string get_adresse();
     //vector<char> get_sequence2();
     char* get_sequence2();

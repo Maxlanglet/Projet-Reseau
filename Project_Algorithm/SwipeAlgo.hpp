@@ -14,18 +14,16 @@
 class Swipe{
 public:
     int get_pos(char prot);
-    int get_blosum(int i, int j);
+    int blosum(int i, int j);
     Swipe();
-    double Algo(const string &fasta, const char* &psq, int offset1, int offset2);
+    int Algo(const string &fasta,const char* &psq, int offset1, int offset2, int gap_penality = 11, int extension_penality = 1);
+    //static void Algo(const string &fasta, const char* &psq, int offset1, int offset2);
     int findMax(int array[], int longueur);
+    void initialise_blosum(string adresse="blosum62");
+    void free_blosum();
 private:
-    //peut etre mettre matrice et resize a chaque fois dans l'algo
-    //vector<vector<int>> mat;
+    int** blosum1;
 };
-
-
-//int get_pos(char prot);
-//void swipe(string fasta, vector<char> psq, int offset1, int offset2);
 
 
 #endif /* SwipeAlgo_hpp */
