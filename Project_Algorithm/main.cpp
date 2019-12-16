@@ -10,11 +10,14 @@
 #include "header.h"
 #include <map>
 #include <iterator>
+#include <thread>
+#include <future>
 
 
 int main(int argc, const char * argv[]) {
     if(argc<3){
         cout << "Argument demandé :" << argv[0]<<" [fichier unisprot] [fichier fasta] optionnel: [fichier matrice blosum] [Gap open penality] [Gap penality extension]  "<<endl;
+        cout << "Attention, si vous voulez definir un gap ou extension penality, les deux DOIVENT etre definit. "<<endl;
         return 1;
     }
 
@@ -60,9 +63,11 @@ int main(int argc, const char * argv[]) {
     }
     
     
-    map<double, int> score_max;
+    map<double, int> score_max;//TODO: j ai quand meme envie de changer map en vector
     int score = 0;
     const char* seq = sequence.get_sequence2();
+    
+    
     
     cout << endl;
     cout << "[+] Lancement swipe" << endl;
@@ -71,6 +76,8 @@ int main(int argc, const char * argv[]) {
     start = std::chrono::system_clock::now();
     int init= 116000;
     int fin = 124000;
+    //int med = init+(fin-init)/2;
+    //int score2=0;
     //int size = offsets.get_size();
     for (int g = init; g<fin; g++) {//offsets.get_size()//119500
         int h = offsets.get_seq_offset(g-1);
@@ -80,12 +87,24 @@ int main(int argc, const char * argv[]) {
         
         //int f = offsets.get_seq_offset(3500+g);
         //int d = offsets.get_seq_offset(3500+g-1);
-        //future<int> fut = async(launch::async, &Swipe::Algo, &swipe.Algo, fasta, seq, h, u);
+        //future<int> fut = async(launch::async, &Swipe::Algo, &swipe, fasta, seq, h, u);
         //future<int> fut = async(launch::async, [&]{ return swipe.Algo(fasta, seq, h, u);});
         //future<int> fut2 = async(launch::async, [&]{ return swipe.Algo(fasta, seq, f, d);});
+        /*
+        std::promise<int> p;
+        auto f = p.get_future();
+         */
+        /*
+        thread t1(&Swipe::Algo, swipe, fasta, seq, h, u, &score2);
+        thread t2(&Swipe::Algo, swipe, fasta, seq, f, d, &score2);
+        t1.join();
+        t2.join();
+         */
+        //thread t1([&] {score = swipe.Algo(fasta, seq, h, u);});
+        //thread t2([&] {score2 = swipe.Algo(fasta, seq, f, d);});
         score = swipe.Algo(fasta, seq, h, u, gap_penality, extension_penality);
-        //int score = fut.get();
-        //int score2 = fut2.get();
+        //score = fut.get();
+        //score2 = fut2.get();
         
         
         if(score_max.size() < 20){

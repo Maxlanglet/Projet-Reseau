@@ -256,7 +256,7 @@ int Swipe::Algo(const string &fasta, const char* &psq, int offset1, int offset2,
             }
              */
             int comp[2];
-            comp[0]=maxlocal-u-v;//-v
+            comp[0]=maxlocal-u-v;//-v//TODO: il manque -11 dans les scores peut etre erreur ici
             comp[1]=q-u;
             if(j < colonne){
                 q=findMax(comp,2);

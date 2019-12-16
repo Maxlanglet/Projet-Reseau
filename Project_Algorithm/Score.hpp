@@ -26,7 +26,6 @@
 #include <chrono>
 #include <ctime>
 #include <map>
-#include <future>
 #include <regex>
 #include <sstream>
 
