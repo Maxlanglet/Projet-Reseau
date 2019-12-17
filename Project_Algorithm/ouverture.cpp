@@ -2,8 +2,9 @@
 //  ouverture.cpp
 //  Project_Algorithm
 //
-//  Created by Langlet Maxime on 17/11/2019.
-//  Copyright © 2019 Langlet Maxime. All rights reserved.
+//  Created on 17/11/2019.
+//
+//  utilisé au mis parcourt
 //
 
 #include "ouverture.hpp"
@@ -19,7 +20,7 @@
 
 using namespace std;
 
-vector<char> read_psq( ifstream &file){
+vector<char> read_psq(ifstream &file){
     vector<char> buffer;
     char buf;
     while (!file.eof()) {

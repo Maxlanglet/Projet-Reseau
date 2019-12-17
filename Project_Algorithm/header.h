@@ -1,4 +1,7 @@
-#include "binaire.h"
+#ifndef header_h
+#define header_h
+
+#include "Offsets.hpp"
 
 class Header : public Binaire
 {
@@ -14,8 +17,9 @@ private:
 public :
 	Header(string adr);
 	void acquiert(int offset);
-	void getData();
+	void getData(ofstream* res);
 	
 	
 	
 };
+#endif
