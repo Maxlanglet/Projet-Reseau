@@ -2,13 +2,8 @@
 //  SwipeAlgo.hpp
 //  Project_Algorithm
 //
-<<<<<<< HEAD
-//  Created by Langlet Maxime on 03/12/2019.
-//  Copyright © 2019 Langlet Maxime. All rights reserved.
-=======
 //  Created on 03/12/2019.
 //
->>>>>>> 16fb9d09a4afc4ee8957e3e23b9fe45f7ee87c68
 //
 
 #ifndef SwipeAlgo_hpp

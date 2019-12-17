@@ -29,20 +29,14 @@ public:
     //void get_seq_offsets();
     int get_seq_offset(int pos);
     int get_head_offset(int pos);
-<<<<<<< HEAD
-=======
     void print_info(ifstream* f);
->>>>>>> 16fb9d09a4afc4ee8957e3e23b9fe45f7ee87c68
     unsigned long get_size();
     Offsets(string adr);
 private:
     string adresse;
     vector<int> seq_offsets;
     vector<int> head_offsets;
-<<<<<<< HEAD
-=======
     vector<int> info;
->>>>>>> 16fb9d09a4afc4ee8957e3e23b9fe45f7ee87c68
     //ifstream f;
 };
 

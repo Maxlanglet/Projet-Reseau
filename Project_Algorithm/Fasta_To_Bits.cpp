@@ -49,17 +49,7 @@ string Fasta_To_String(ifstream &input){
                 }
             }
         }
-<<<<<<< HEAD
-        /*
-        if(!nom.empty()){
-            cout << contenu << endl;
-            //cout << nom << ":" << string_To_Bits(contenu) << endl;
-            //return contenu;
-        }
-        */
-=======
         
->>>>>>> 16fb9d09a4afc4ee8957e3e23b9fe45f7ee87c68
     }
     else{
         string pasouvert("Pas ouvert");

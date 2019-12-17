@@ -99,20 +99,8 @@ void Header::acquiert(int offset){
 }
 
 void Header::getData(ofstream* res){
-<<<<<<< HEAD
-    //cout << left << base<<"|"<<quantieme<< setw(2) << nom << endl;
-    //*res << left << "Sequence with significant alignements" << setw(20) << "Score(bits)" << endl;
-    /*
-	cout<<"nom proteine : "<<nom<<endl;
-	cout<<"nom base de donnée : "<<base<<endl;
-	cout<<"numero : "<<quantieme<<endl;
-	cout<<"taxid : "<<taxid<<endl;
-     */
-    *res << left << base<<" | "<<quantieme<<" | "<<nom<<" | "<<taxid << setw(20) << " | score : ";
-=======
     //affiche dans le fichier resultat les information sur la séquence
     *res << left << base<<" | "<<quantieme<<" | "<<nom<<" | "<<taxid << setw(20) << " | score :";
->>>>>>> 16fb9d09a4afc4ee8957e3e23b9fe45f7ee87c68
     
 }
 

@@ -1,0 +1,28 @@
+Smith-Waterman Algorithm Mon Dec 16 15:58:37 2019
+
+
+Elapsed time: 57s
+Average time per sequence: 6.64438s
+
+Sequence producing significant alignements :
+
+BL_ORD_ID | 122495 | sp|Q5A1D3|ERK1_CANAL Extracellular signal-regulated kinase 1 OS=Candida albicans (strain SC5314 / ATCC MYA-2876) OX=237561 GN=CEK1 PE=1 SV=3 | 0 | score :          52                  
+BL_ORD_ID | 121336 | sp|O13146|EPHA3_DANRE Ephrin type-A receptor 3 OS=Danio rerio OX=7955 GN=epha3 PE=2 SV=1 | 0 | score :          189                 
+BL_ORD_ID | 121338 | sp|P29319|EPHA3_MOUSE Ephrin type-A receptor 3 OS=Mus musculus OX=10090 GN=Epha3 PE=1 SV=1 | 0 | score :          190                 
+BL_ORD_ID | 121246 | sp|Q91694|EPA4B_XENLA Ephrin type-A receptor 4-B OS=Xenopus laevis OX=8355 GN=epha4-b PE=2 SV=1 | 0 | score :          191                 
+BL_ORD_ID | 121264 | sp|Q91736|EPB1B_XENLA Ephrin type-B receptor 1-B (Fragment) OS=Xenopus laevis OX=8355 GN=ephb1-b PE=1 SV=1 | 0 | score :          193                 
+BL_ORD_ID | 121343 | sp|P54755|EPHA5_CHICK Ephrin type-A receptor 5 OS=Gallus gallus OX=9031 GN=EPHA5 PE=2 SV=1 | 0 | score :          194                 
+BL_ORD_ID | 121332 | sp|P29317|EPHA2_HUMAN Ephrin type-A receptor 2 OS=Homo sapiens OX=9606 GN=EPHA2 PE=1 SV=2 | 0 | score :          200                 
+BL_ORD_ID | 121334 | sp|Q03145|EPHA2_MOUSE Ephrin type-A receptor 2 OS=Mus musculus OX=10090 GN=Epha2 PE=1 SV=3 | 0 | score :          206                 
+BL_ORD_ID | 116936 | sp|P0CY46|EGFR_APIME Epidermal growth factor receptor OS=Apis mellifera OX=7460 GN=Egfr PE=2 SV=1 | 0 | score :          768                 
+BL_ORD_ID | 116938 | sp|P04412|EGFR_DROME Epidermal growth factor receptor OS=Drosophila melanogaster OX=7227 GN=Egfr PE=1 SV=3 | 0 | score :          782                 
+BL_ORD_ID | 122071 | sp|P21860|ERBB3_HUMAN Receptor tyrosine-protein kinase erbB-3 OS=Homo sapiens OX=9606 GN=ERBB3 PE=1 SV=1 | 0 | score :          974                 
+BL_ORD_ID | 122073 | sp|Q5RB22|ERBB3_PONAB Receptor tyrosine-protein kinase erbB-3 OS=Pongo abelii OX=9601 GN=ERBB3 PE=2 SV=1 | 0 | score :          975                 
+BL_ORD_ID | 122079 | sp|P00535|ERBB_AVIER Tyrosine-protein kinase transforming protein erbB OS=Avian erythroblastosis virus (strain ES4) OX=79685 GN=V-ERBB PE=3 SV=1 | 0 | score :          1020                
+BL_ORD_ID | 116937 | sp|P13387|EGFR_CHICK Epidermal growth factor receptor (Fragment) OS=Gallus gallus OX=9031 GN=EGFR PE=1 SV=1 | 0 | score :          1068                
+BL_ORD_ID | 122069 | sp|P70424|ERBB2_MOUSE Receptor tyrosine-protein kinase erbB-2 OS=Mus musculus OX=10090 GN=Erbb2 PE=1 SV=3 | 0 | score :          1166                
+BL_ORD_ID | 122067 | sp|P04626|ERBB2_HUMAN Receptor tyrosine-protein kinase erbB-2 OS=Homo sapiens OX=9606 GN=ERBB2 PE=1 SV=1 | 0 | score :          1188                
+BL_ORD_ID | 122077 | sp|Q62956|ERBB4_RAT Receptor tyrosine-protein kinase erbB-4 OS=Rattus norvegicus OX=10116 GN=Erbb4 PE=1 SV=3 | 0 | score :          1245                
+BL_ORD_ID | 122075 | sp|Q15303|ERBB4_HUMAN Receptor tyrosine-protein kinase erbB-4 OS=Homo sapiens OX=9606 GN=ERBB4 PE=1 SV=1 | 0 | score :          1254                
+BL_ORD_ID | 116941 | sp|Q01279|EGFR_MOUSE Epidermal growth factor receptor OS=Mus musculus OX=10090 GN=Egfr PE=1 SV=1 | 0 | score :          2287                
+BL_ORD_ID | 116939 | sp|P00533|EGFR_HUMAN Epidermal growth factor receptor OS=Homo sapiens OX=9606 GN=EGFR PE=1 SV=2 | 0 | score :          2506                
