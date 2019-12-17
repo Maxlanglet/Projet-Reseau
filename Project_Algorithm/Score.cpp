@@ -3,10 +3,11 @@
 //  Project_Algorithm
 //
 //  Created by Langlet Maxime on 08/11/2019.
-//  Copyright © 2019 Langlet Maxime. All rights reserved.
+//
 //
 
 #include "Score.hpp"
+<<<<<<< HEAD
 //Pas sur de si c'est juste ca mais bon au cas ou
 /*
 string Score(string sequence){//lire séquence et assigner score pour chaque lettre donc faire binaire en lettre
@@ -104,6 +105,9 @@ string Score(string sequence){//lire séquence et assigner score pour chaque let
 }
 */
 
+=======
+//établit la correspondance entre la valeur du résidu et la lettre qui le représente
+>>>>>>> 16fb9d09a4afc4ee8957e3e23b9fe45f7ee87c68
 char score_Inverse(int valeur){
     char lettre = '\0';
     switch (valeur) {
