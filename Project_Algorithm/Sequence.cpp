@@ -10,7 +10,7 @@
 
 Sequence::Sequence(string adr) : Binaire(adr){
     //vector<char> sequence;
-    char* sequence;
+    //char* sequence;
     adresse = adr;
 }
 //On stock toute la base de données dans une liste de pointeurs

@@ -24,13 +24,10 @@ int main(int argc, const char * argv[]) {
     
     string chemin_unisprot1 = argv[1];
     chemin_unisprot1.append(".psq");
-    cout << chemin_unisprot1 << endl;
     string chemin_unisprot3 = argv[1];
     chemin_unisprot3.append(".phr");
-    cout << chemin_unisprot3 << endl;
     string chemin_unisprot2 = argv[1];
     chemin_unisprot2.append(".pin");
-    cout << chemin_unisprot2 << endl;
     //On construit les objets qui correspondent à chacun des fichiers
     //en utilisant les adresses
     Sequence sequence(chemin_unisprot1);
@@ -89,11 +86,7 @@ int main(int argc, const char * argv[]) {
     double tempsmoyen = 0.0;
     chrono::time_point<chrono::system_clock> start, end;
     start = std::chrono::system_clock::now();
-    //définis sur quelle partie de la base de donnée on chercher
-    //int init= 116000;
-    //int fin = 124000;
-    //int med = init+(fin-init)/2;
-    //int score2=0;
+    
     long size = offsets.get_size();
     for (int g = 1; g<size; g++) {
         int h = offsets.get_seq_offset(g-1);
@@ -102,11 +95,38 @@ int main(int argc, const char * argv[]) {
         start2 = std::chrono::system_clock::now();
         
         score = swipe.Algo(fasta, seq, h, u, gap_penality, extension_penality);
+    //test de parallélisme, nous avons laissé cette partie non terminée en commentaire de manière intentionnelle pour indiquer que nous avons essayer d'utiliser le multithreading mais etant donné que nous n'avons pas sut le faire fonctionner, nous voulions savoir ou etait nos erreurs
+    
         
-        //test de parallélisme
-        //int f = offsets.get_seq_offset(3500+g);
-        //int d = offsets.get_seq_offset(3500+g-1);
-        //future<int> fut = async(launch::async, &Swipe::Algo, &swipe, fasta, seq, h, u);
+        /*
+    thread t1(
+              [&offsets, &extension_penality, &gap_penality, &fasta, &seq, &tempsmoyen](Swipe &swipe) {
+        int init= 116000;
+        int fin = 124000;
+        map<double, int> score_max;
+        int score = 0;
+        for (int g = init; g<fin; g++) {
+            int h = offsets.get_seq_offset(g-1);
+            int u = offsets.get_seq_offset(g);
+            chrono::time_point<chrono::system_clock> start2, end2;
+            start2 = std::chrono::system_clock::now();
+            
+            score = swipe.Algo(fasta, seq, h, u, gap_penality, extension_penality);
+            if(score_max.size() < 20){
+                score_max.insert(pair<double, int>(score,g));
+                //score_max.insert(pair<double, int>(score2,3500+g));
+            }
+            else if(score_max.size() == 20 && score_max.begin()->first < score){
+                score_max.erase(score_max.begin());
+                score_max.insert(pair<double, int>(score,g));
+            }
+            
+            end2 = std::chrono::system_clock::now();
+            double elapsed_seconds2 = chrono::duration_cast<chrono::milliseconds>(end2-start2).count();
+            tempsmoyen += elapsed_seconds2;
+        }
+    });
+     */
         //future<int> fut = async(launch::async, [&]{ return swipe.Algo(fasta, seq, h, u);});
         //future<int> fut2 = async(launch::async, [&]{ return swipe.Algo(fasta, seq, f, d);});
         /*
@@ -121,16 +141,14 @@ int main(int argc, const char * argv[]) {
          */
         //thread t1([&] {score = swipe.Algo(fasta, seq, h, u);});
         //thread t2([&] {score2 = swipe.Algo(fasta, seq, f, d);});
-        
-        
         //score = fut.get();
         //score2 = fut2.get();
         
         //si le score est plus grand que le plus petit score enregistré
         // on retire le plus petit et on ajoute le nouveau score dans le tableau
+
         if(score_max.size() < 20){
             score_max.insert(pair<double, int>(score,g));
-            //score_max.insert(pair<double, int>(score2,3500+g));
         }
         else if(score_max.size() == 20 && score_max.begin()->first < score){
             score_max.erase(score_max.begin());
@@ -140,10 +158,6 @@ int main(int argc, const char * argv[]) {
         end2 = std::chrono::system_clock::now();
         double elapsed_seconds2 = chrono::duration_cast<chrono::milliseconds>(end2-start2).count();
         tempsmoyen += elapsed_seconds2;
-        //permet de voir où on n'en n'est dans le parcourt de la base de donnée
-        if(g%1000 == 0 ){
-            cout<<g-1<<endl;
-        }
     }
     end = std::chrono::system_clock::now();
     double elapsed_seconds = chrono::duration_cast<chrono::seconds>(end-start).count();
@@ -155,16 +169,15 @@ int main(int argc, const char * argv[]) {
     int off=0;
     head.open_fichier();
     
-    auto timenow =chrono::system_clock::to_time_t(chrono::system_clock::now());
     ofstream result("resultat.txt", ios::app);
+    result<<endl;
     result<<"Matrix used : "<<matrice<<endl;
     result<<"Gap penalty : "<<gap_penality<<" \nExtension penalty : "<<extension_penality<<"\n"<<endl;
     result<<"Query file path: "<<chemin_fasta<<endl;
-    result << "Smith-Waterman Algorithm " << ctime(&timenow) << endl;
     result << endl;
 
     result << "Elapsed time: " << elapsed_seconds << "s" << endl;
-    result << "Average time per sequence: " << tempsmoyen/size << "s" << endl; //TODO: a changer ici
+    result << "Average time per sequence: " << tempsmoyen/size << "ms" << endl;
     result << endl;
     
     result << "Sequence producing significant alignements, classed with increasing score :" << endl;
@@ -182,6 +195,6 @@ int main(int argc, const char * argv[]) {
     head.close_fichier();
     result.close();
     cout << endl;
-    cout << "[+] Fichier resultat.txt créé dans le dossier dans lequel vous etes" << endl; //TODO: changer 
+    cout << "[+] Fichier resultat.txt créé dans le dossier dans lequel vous etes" << endl;
     return 0;
 }

@@ -2,7 +2,7 @@
 //  Score.hpp
 //  Project_Algorithm
 //
-//  Created by Langlet Maxime on 08/11/2019.
+//  Created on 08/11/2019.
 //  
 //
 

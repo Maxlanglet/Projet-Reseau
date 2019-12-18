@@ -2,7 +2,7 @@
 //  Offsets.cpp
 //  Project_Algorithm
 //
-//  Created by Langlet Maxime on 06/12/2019.
+//  Created on 06/12/2019.
 //
 //
 
@@ -49,7 +49,7 @@ void Offsets::offset(){
         
         cout << "[+] Finis header" << endl;
         
-        int pos = f.tellg();
+        long long pos = f.tellg();
         print_info(&f);
         f.seekg(pos);
         pos = f.tellg();
@@ -87,11 +87,15 @@ void Offsets::header_offset(){
 void Offsets::print_info(ifstream* f){
     //on recupère les données stonckées sur les 3 premiers int32
     int version = info[0];
-    int type_residu = info[1];
+    //int type_residu = info[1];
     int size_title = info[2];
-    
+    auto timenow =chrono::system_clock::to_time_t(chrono::system_clock::now());
     ofstream result("resultat.txt");
-    result<<"Information about the database :"<<endl;
+    result << "Smith-Waterman Algorithm " << endl;
+    result << "Time of execution :"<<  ctime(&timenow) << endl;
+    result <<endl;
+    result <<endl;
+    result<<"Information about the database"<<endl;
     result<<"Version : "<<version<<endl;
     //pour lire le titre de la base de donnée et sa date on accède au fichier
     //et on utilise le même principe que pour lire dans le header
@@ -112,7 +116,7 @@ void Offsets::print_info(ifstream* f){
     f->read(date, size_date);
     string date_str = string(date, size_date);
     
-    result<<"Date : "<<date_str<<endl;
+    result<<"Date of creation of the file : "<<date_str<<endl;
     
     delete[] titre;
     delete[] date;

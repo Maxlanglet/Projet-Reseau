@@ -2,8 +2,7 @@
 //  Sequence.hpp
 //  Project_Algorithm
 //
-//  Created by Langlet Maxime on 06/12/2019.
-//  Copyright © 2019 Langlet Maxime. All rights reserved.
+//  Created on 06/12/2019.
 //
 
 #ifndef Sequence_hpp

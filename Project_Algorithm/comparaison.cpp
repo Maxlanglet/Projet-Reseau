@@ -2,8 +2,7 @@
 //  comparaison.cpp
 //  Project_Algorithm
 //
-//  Created by Langlet Maxime on 22/11/2019.
-//  Copyright © 2019 Langlet Maxime. All rights reserved.
+
 
 // Utilisé pour la remise intermédiaire mais plus dans le code actuel
 //

@@ -2,8 +2,6 @@
 //  Fasta_To_Bits.cpp
 //  Project_Algorithm
 //
-//  Created by Langlet Maxime on 08/11/2019.
-//  Copyright © 2019 Langlet Maxime. All rights reserved.
 //
 
 #include "Fasta_To_Bits.hpp"

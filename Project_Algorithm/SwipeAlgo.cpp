@@ -2,7 +2,7 @@
 //  SwipeAlgo.cpp
 //  Project_Algorithm
 //
-//  Created by Langlet Maxime on 03/12/2019.
+//  Created on 03/12/2019.
 //
 //
 
@@ -123,7 +123,7 @@ void Swipe::initialise_blosum(string adresse){//Initialise la matrice blosum ven
     int k=0;
     int l=0;
     string word, t, q, filename;
-    static const std::regex intRegex{ "[-+]?([0-9]*\.[0-9]+|[0-9]+)"};
+    static const std::regex intRegex{ "[-+]?([0-9]*\\.[0-9]+|[0-9]+)"};
     while (file >> word){
         if (regex_match(word, intRegex)){//Regex verifie si la string est un entier ou pas
             istringstream inputStream(word);

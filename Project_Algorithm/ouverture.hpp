@@ -2,7 +2,7 @@
 //  ouverture.hpp
 //  Project_Algorithm
 //
-//  Created by Langlet Maxime on 17/11/2019.
+//  Created by on 17/11/2019.
 //  utilisé au mis parcourt
 //
 
