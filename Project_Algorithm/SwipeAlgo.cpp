@@ -241,8 +241,8 @@ int Swipe::Algo(const string &fasta, const char* &psq, int offset1, int offset2,
             }
         }
     }
-    double lambda = 0.267;
-    int Sbit = (max*lambda-3.34)/log(2);
+   /** double lambda = 0.267;
+    int Sbit = (max*lambda-3.34)/log(2); **/
     
     for(int row = 0; row<ligne+1; row++){
         free(mat[row]);
@@ -251,5 +251,6 @@ int Swipe::Algo(const string &fasta, const char* &psq, int offset1, int offset2,
     //free(p);
     delete [] p;
     
-    return Sbit;
+    return max;
+   // return Sbit;
 }
