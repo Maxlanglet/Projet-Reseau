@@ -147,10 +147,10 @@ int main(int argc, const char * argv[]) {
         //si le score est plus grand que le plus petit score enregistré
         // on retire le plus petit et on ajoute le nouveau score dans le tableau
 
-        if(score_max.size() < 20){
+        if(score_max.size() < 21){
             score_max.insert(pair<double, int>(score,g));
         }
-        else if(score_max.size() == 20 && score_max.begin()->first < score){
+        else if(score_max.size() == 21 && score_max.begin()->first < score){
             score_max.erase(score_max.begin());
             score_max.insert(pair<double, int>(score,g));
         }
@@ -180,10 +180,10 @@ int main(int argc, const char * argv[]) {
     result << "Average time per sequence: " << tempsmoyen/size << "ms" << endl;
     result << endl;
     
-    result << "Sequence producing significant alignements, classed with increasing score :" << endl;
+    result << "Sequence producing significant alignements, classed with decreasing score :" << endl;
     result <<endl;
     //parcourt la liste des meilleurs score et affiche les informations sur la protéine contenues dans le header
-    for(itr = score_max.begin(); itr != score_max.end(); ++itr){
+    for(itr = --score_max.end(); itr != score_max.begin(); itr--){
         off = offsets.get_head_offset((int)((itr)->second - 1));
         head.acquiert(off);
         head.getData(&result);
