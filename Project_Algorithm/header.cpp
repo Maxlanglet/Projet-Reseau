@@ -100,7 +100,7 @@ void Header::acquiert(int offset){
 
 void Header::getData(ofstream* res){
     //affiche dans le fichier resultat les information sur la séquence
-    *res << left << base<<" | "<<quantieme<<" | "<<nom<<" | "<<taxid << " | Score (Sbit) :";
+    *res << left << base<<" | "<<quantieme<<" | "<<nom<<" | "<<taxid << " | Score (brut) :";
     
 }
 
