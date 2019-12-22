@@ -2,7 +2,6 @@
 //  comparaison.hpp
 //  Project_Algorithm
 //
-//
 
 #ifndef comparaison_hpp
 #define comparaison_hpp
