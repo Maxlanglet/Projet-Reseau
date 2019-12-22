@@ -19,7 +19,6 @@
 #define ANAGRAM_H
 
 #include "personal_strings.h"
-
 /*
  * =====================================================================================
  *    Structure:  anagram_t
