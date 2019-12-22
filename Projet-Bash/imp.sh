@@ -1,6 +1,8 @@
 #!/bin/bash
 #Maxime Langlet 000427821
 
+
+
 [ "$#" -ne "4" ] && echo "Mauvais nombre d'arguments" >&2 && exit 1
 
 #repertoire
