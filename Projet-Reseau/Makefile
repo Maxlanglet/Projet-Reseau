@@ -9,15 +9,17 @@ endif
 
 all: Reseau_client Reseau_server clean
 
+Reseau_client.o: Reseau_client.c
+	$(CC) $(CFLAGS) -c Reseau_client.c
+
 Reseau_client: Reseau_client.o
 	$(CC) $(LDFLAGS) -o $@ $^
 
-Reseau_client.o: Reseau_client.c
+Reseau_server.o: Reseau_server.c
+	$(CC) $(CFLAGS) -c Reseau_server.c
 
 Reseau_server: anagram.o personal_strings.o Reseau_server.o
 	$(CC) $(LDFLAGS) -o $@ $^
-
-Reseau_server.o: Reseau_server.c
 
 anagram.o: anagram.c
 	$(CC) $(CFLAGS) -c anagram.c

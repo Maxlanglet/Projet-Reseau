@@ -11,10 +11,11 @@
  *       Compiler:  gcc
  *
  *         Author:  Guillerme Duvillié (mfreeze), gduvillie@openmailbox.org
- *   Organization:
+ *   Organization:  
  *
  * =====================================================================================
  */
+
 #ifndef ANAGRAM_H
 #define ANAGRAM_H
 
@@ -23,11 +24,11 @@
  * =====================================================================================
  *    Structure:  anagram_t
  *  Description:  Structure contenant les informations nécessaires à un anagramme
- *                  - char liste[]          : chaîne de caractère contenant un mot et
+ *                  - char liste[]          : chaîne de caractère contenant un mot et 
  *                                              tous ses anagrammes
- *                  - char mot_courant[]    : chaîne de caractère contenant une copie de
+ *                  - char mot_courant[]    : chaîne de caractère contenant une copie de 
  *                                              l'anagramme en cours
- *                  - char *deb_mot_courant : pointeur sur le début du mot proposé aux
+ *                  - char *deb_mot_courant : pointeur sur le début du mot proposé aux 
  *                                              clients
  *                  - int longueur_mot      : la longueur du mot et de ses anagrammes
  *                  - int nombre_mot        : le nombre de mot que contient la ligne
@@ -44,7 +45,7 @@ typedef struct anagram {
  * =====================================================================================
  *    Structure:  dict_t
  *  Description:  Structure contenant les informations relatives à un dictionnaire
- *                  - char chemin[]     : chaîne de caractères contenant le chemin vers
+ *                  - char chemin[]     : chaîne de caractères contenant le chemin vers 
  *                                          le dictionnaire
  *                  - int nombre_lignes : nombre d'entrées du dictionnaire
  * =====================================================================================
@@ -62,5 +63,5 @@ int new_anagram (anagram_t *, dict_t *);
 int is_solution     (const anagram_t *, const char *);
 
 int init_dico      (dict_t *, const char *);
-void free_dico           (dict_t *);
+void free_dico           (dict_t *); 
 #endif
